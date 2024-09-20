@@ -25,11 +25,11 @@ class NewsRequest extends FormRequest
         $rules = [
             'title' => ['required', 'string', 'max:255', Rule::unique('news', 'title')->ignore($this->route('news'), 'slug')],
             'content' => ['required', 'string'],
-            'image' => ['required', 'image', 'max:2048', 'mimes:jpeg,png,jpg,svg'],
+            'images.*' => ['required', 'image', 'max:2048', 'mimes:jpeg,png,jpg,svg'],
         ];
 
         if ($this->isMethod('PUT')) {
-            $rules['image'] = ['nullable', 'image', 'max:2048', 'mimes:jpeg,png,jpg,svg'];
+            $rules['images.*'] = ['nullable', 'image', 'max:2048', 'mimes:jpeg,png,jpg,svg'];
         }
 
         return $rules;
@@ -43,9 +43,9 @@ class NewsRequest extends FormRequest
             'title.unique' => 'Judul berita ini sudah ada, silakan gunakan judul yang lain.',
             'content.required' => 'Konten wajib diisi.',
             'image.required' => 'Gambar wajib diisi.',
-            'image.image' => 'Gambar harus berupa file gambar.',
-            'image.mimes' => 'Gambar harus berupa file dengan ekstensi: jpeg, png, jpg, svg.',
-            'image.max' => 'Gambar tidak boleh lebih dari 2MB.',
+            'images.*.image' => 'Gambar harus berupa file gambar.',
+            'images.*.mimes' => 'Gambar harus berupa file dengan ekstensi: jpeg, png, jpg, svg.',
+            'images.*.max' => 'Gambar tidak boleh lebih dari 2MB.',
         ];
     }
 

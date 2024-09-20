@@ -16,11 +16,17 @@ class News extends Model
         'title',
         'slug',
         'content',
-        'image',
     ];
 
     public function getRouteKeyName(): string
     {
         return 'slug';
     }
+
+    public function images()
+    {
+        return $this->hasMany(NewsImage::class);
+    }
+
+    protected $with = ['images'];
 }

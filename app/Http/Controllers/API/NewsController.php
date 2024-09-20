@@ -9,6 +9,7 @@ use App\Http\Requests\NewsRequest;
 use App\Http\Resources\NewsResource;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\MetaPaginateResource;
+use App\Models\NewsImage;
 
 class NewsController extends Controller
 {
@@ -38,15 +39,21 @@ class NewsController extends Controller
      */
     public function store(NewsRequest $request)
     {
+        // return response()->json($request->all());
         try {
             $validatedData = $request->only('title', 'content');
 
-            $imagePath = $request->file('image')->store('images/news', 'public');
-            $imageFileName = basename($imagePath);
-
-            $validatedData['image'] =  $imageFileName;
-
             $news = News::create($validatedData);
+
+            foreach ($request->file('images') as $image) {
+                $imagePath = $image->store('images/news', 'public');
+                $imageFileName = basename($imagePath);
+
+                NewsImage::create([
+                    'news_id' => $news->id,
+                    'image' => $imageFileName
+                ]);
+            }
 
             $data = [
                 'status' => true,
@@ -115,7 +122,9 @@ class NewsController extends Controller
     public function destroy(News $news)
     {
         try {
-            Storage::delete('public/images/news/' . $news->image);
+            foreach ($news->images as $image) {
+                Storage::delete('public/images/news/' . $image->image);
+            }
 
             $news->delete();
 
