@@ -24,9 +24,10 @@ class NewsResource extends JsonResource
                     url('storage/images/news/' . $image->image),
                 ];
             }),
+            'day_published' => Carbon::parse($this->created_at)->locale('id')->translatedFormat('l'),
             'published' => Carbon::parse($this->created_at)->diffInHours() >= 24
-                ? Carbon::parse($this->created_at)->translatedFormat('j F Y')
-                : Carbon::parse($this->created_at)->diffForHumans(),
+                ? Carbon::parse($this->created_at)->locale('id')->translatedFormat('j F Y')
+                : Carbon::parse($this->created_at)->locale('id')->diffForHumans(),
         ];
     }
 }
