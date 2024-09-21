@@ -76,15 +76,22 @@ Route::prefix('public')->group(function () {
             ]
         ];
 
-        if (isset($locations[$id])) {
-            $response = $locations[$id];
-        } else {
+        if (isset($locations['data'][$id])) {
             $response = [
-                "error" => "Location not found"
+                'status' => true,
+                'message' => $locations['message'],
+                'data' => $locations['data'][$id]
             ];
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Location not found',
+                'data' => []
+            ], 404); 
         }
 
         return response()->json($response);
+
     });
 
     Route::get('/news', [API\Public\NewsController::class, 'index']);
