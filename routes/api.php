@@ -14,19 +14,20 @@ Route::prefix('public')->group(function () {
         $data = [
             'status' => true,
             'message' => 'Show Listing Categories Success',
-            'data' =>
-            [
-                "id" => 1,
-                "name" => "BumDes",
-            ],
-            [
-                "id" => 2,
-                "name" => "Wisata Desa",
-            ],
-            [
-                "id" => 3,
-                "name" => "Fasilitas Umum",
-            ],
+            'data' =>[
+                [
+                    "id" => 1,
+                    "name" => "BumDes",
+                ],
+                [
+                    "id" => 2,
+                    "name" => "Wisata Desa",
+                ],
+                [
+                    "id" => 3,
+                    "name" => "Fasilitas Umum",
+                ],
+            ]  
         ];
 
         return response()->json($data);
