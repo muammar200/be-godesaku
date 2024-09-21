@@ -10,8 +10,11 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::prefix('public')->group(function () {
-    Route::get('/listing-categories', function(){
+    Route::get('/listing-categories', function () {
         $data = [
+            'status' => true,
+            'message' => 'Show Listing Categories Success',
+            'data' =>
             [
                 "id" => 1,
                 "name" => "BumDes",
@@ -26,44 +29,48 @@ Route::prefix('public')->group(function () {
             ],
         ];
 
-        return response()->json($data);
+        return response()->json();
     });
     Route::get('/listing-locations/{id}', function ($id) {
         $locations = [
-            1 => [
-                [
-                    "id" => 1,
-                    "name" => "Sultan Ayam Geprek Samata",
-                    "latitude" => -5.20218,
-                    "longitude" => 119.49572
+            'status' => true,
+            'message' => 'Show Listing By Category Id Success',
+            'data' => [
+                1 => [
+                    [
+                        "id" => 1,
+                        "name" => "Sultan Ayam Geprek Samata",
+                        "latitude" => -5.20218,
+                        "longitude" => 119.49572
+                    ],
+                    [
+                        "id" => 2,
+                        "name" => "Bokatana Samata",
+                        "latitude" => -5.20196,
+                        "longitude" => 119.49466
+                    ]
                 ],
-                [
-                    "id" => 2,
-                    "name" => "Bokatana Samata",
-                    "latitude" => -5.20196,
-                    "longitude" => 119.49466
-                ]
-            ],
-            2 => [
-                [
-                    "id" => 3,
-                    "name" => "Bukit Samata",
-                    "latitude" => -5.20083,
-                    "longitude" => 119.49733
+                2 => [
+                    [
+                        "id" => 3,
+                        "name" => "Bukit Samata",
+                        "latitude" => -5.20083,
+                        "longitude" => 119.49733
+                    ],
                 ],
-            ],
-            3 => [
-                [
-                    "id" => 4,
-                    "name" => "UPT Perpustakaan Syekh Yusuf UIN Alauddin Makassar",
-                    "latitude" => -5.20667,
-                    "longitude" => 119.49751
-                ],
-                [
-                    "id" => 5,
-                    "name" => "Puskesmas Samata",
-                    "latitude" => -5.20103,
-                    "longitude" => 119.48786
+                3 => [
+                    [
+                        "id" => 4,
+                        "name" => "UPT Perpustakaan Syekh Yusuf UIN Alauddin Makassar",
+                        "latitude" => -5.20667,
+                        "longitude" => 119.49751
+                    ],
+                    [
+                        "id" => 5,
+                        "name" => "Puskesmas Samata",
+                        "latitude" => -5.20103,
+                        "longitude" => 119.48786
+                    ]
                 ]
             ]
         ];
@@ -76,7 +83,7 @@ Route::prefix('public')->group(function () {
             ];
         }
 
-        return response()->json($response); 
+        return response()->json($response);
     });
 
     Route::get('/news', [API\Public\NewsController::class, 'index']);
