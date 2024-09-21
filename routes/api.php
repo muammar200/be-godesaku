@@ -29,7 +29,7 @@ Route::prefix('public')->group(function () {
             ],
         ];
 
-        return response()->json();
+        return response()->json($data);
     });
     Route::get('/listing-locations/{id}', function ($id) {
         $locations = [
