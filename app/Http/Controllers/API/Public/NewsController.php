@@ -14,7 +14,7 @@ class NewsController extends Controller
     {
         $page = $request->input('page', 1);
 
-        $news = News::latest()->paginate(9, ["*"], 'page', $page);
+        $news = News::latest()->paginate(10, ["*"], 'page', $page);
 
         $data = [
             'status' => true,

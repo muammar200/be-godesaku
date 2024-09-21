@@ -23,7 +23,7 @@ class NewsRequest extends FormRequest
     public function rules(): array
     {
         $rules = [
-            'title' => ['required', 'string', 'max:255', Rule::unique('news', 'title')->ignore($this->route('news'), 'slug')],
+            'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string'],
             'images.*' => ['required', 'image', 'max:2048', 'mimes:jpeg,png,jpg,svg'],
         ];
@@ -40,7 +40,6 @@ class NewsRequest extends FormRequest
         return [
             'title.required' => 'Judul wajib diisi.',
             'title.max' => 'Judul tidak boleh lebih dari 255 karakter.',
-            'title.unique' => 'Judul berita ini sudah ada, silakan gunakan judul yang lain.',
             'content.required' => 'Konten wajib diisi.',
             'image.required' => 'Gambar wajib diisi.',
             'images.*.image' => 'Gambar harus berupa file gambar.',
