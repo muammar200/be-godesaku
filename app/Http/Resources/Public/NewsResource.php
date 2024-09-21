@@ -21,7 +21,7 @@ class NewsResource extends JsonResource
             'content' => $this->content,
             'images' => $this->images->map(function ($image) {
                 return [
-                    'url' => url('storage/images/news/' . $image->image),
+                    url('storage/images/news/' . $image->image),
                 ];
             }),
             'published' => Carbon::parse($this->created_at)->diffInHours() >= 24
