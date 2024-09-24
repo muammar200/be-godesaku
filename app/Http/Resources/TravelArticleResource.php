@@ -25,6 +25,12 @@ class TravelArticleResource extends JsonResource
                     'url' => url('storage/images/travel_articles/' . $image->image),
                 ];
             }),
+            'videos' => $this->videos->map(function ($video) {
+                return [
+                    'id' => $video->id,
+                    'url' => url('storage/videos/travel_articles/' . $video->video),
+                ];
+            }),
             'created_at' => Carbon::parse($this->created_at)->diffInHours() >= 24
                 ? Carbon::parse($this->created_at)->translatedFormat('j F Y')
                 : Carbon::parse($this->created_at)->diffForHumans(),

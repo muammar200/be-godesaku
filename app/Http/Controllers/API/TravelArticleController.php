@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Models\TravelArticle;
 use App\Models\TravelArticleImage;
+use App\Models\TravelArticleVideo;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\TravelArticleRequest;
@@ -54,6 +55,16 @@ class TravelArticleController extends Controller
                 ]);
             }
 
+            foreach ($request->file('videos') as $video) {
+                $videoPath = $video->store('videos/travel_articles', 'public');
+                $videoFileName = basename($videoPath);
+
+                TravelArticleVideo::create([
+                    'travel_article_id' => $travel_article->id,
+                    'video' => $videoFileName
+                ]);
+            }
+
             $data = [
                 'status' => true,
                 'message' => 'Create Travel Article Success',
@@ -86,13 +97,13 @@ class TravelArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    // public function update(TraRequest $request, News $news)
+    // public function update(TravelArticleRequest $request, TravelArticle $travel_article)
     // {
     //     try {
     //         $validatedData = $request->only(['title', 'content']);
 
     //         if ($request->hasFile('image')) {
-    //             Storage::delete('public/images/news/' . $news->image);
+    //             Storage::delete('public/images/news/' . $travel_article->image);
     //             $imagePath = $request->file('image')->store('images/news', 'public');
     //             $imageFileName = basename($imagePath);
     //             $validatedData['image'] = $imageFileName;
@@ -123,6 +134,10 @@ class TravelArticleController extends Controller
         try {
             foreach ($travel_article->images as $image) {
                 Storage::delete('public/images/travel_articles/' . $image->image);
+            }
+
+            foreach ($travel_article->videos as $video) {
+                Storage::delete('public/videos/travel_articles/' . $video->video);
             }
 
             $travel_article->delete();

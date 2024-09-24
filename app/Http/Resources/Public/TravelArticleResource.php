@@ -23,6 +23,11 @@ class TravelArticleResource extends JsonResource
                     url('storage/images/travel_articles/' . $image->image),
                 ];
             }),
+            'videos' => $this->videos->map(function ($video) {
+                return [
+                    url('storage/videos/travel_articles/' . $video->video),
+                ];
+            }),
         ];
     }
 }

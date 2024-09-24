@@ -30,7 +30,10 @@ class TravelArticle extends Model
         return $this->hasMany(TravelArticleImage::class);
     }
 
-    protected $with = ['images'];
+    public function videos()
+    {
+        return $this->hasMany(TravelArticleVideo::class);
+    }
 
-
+    protected $with = ['images', 'videos'];
 }
