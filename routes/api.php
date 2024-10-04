@@ -17,7 +17,7 @@ Route::prefix('public')->group(function () {
             'data' =>[
                 [
                     "id" => 1,
-                    "name" => "All",
+                    "name" => "Lihat Semua",
                 ],
                 [
                     "id" => 2,
