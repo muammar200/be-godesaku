@@ -16,19 +16,19 @@ Route::prefix('public')->group(function () {
             'message' => 'Show Listing Categories Success',
             'data' =>[
                 [
-                    "id" => 0,
+                    "id" => 1,
                     "name" => "All",
                 ],
                 [
-                    "id" => 1,
+                    "id" => 2,
                     "name" => "BumDes",
                 ],
                 [
-                    "id" => 2,
+                    "id" => 3,
                     "name" => "Wisata Desa",
                 ],
                 [
-                    "id" => 3,
+                    "id" => 4,
                     "name" => "Fasilitas Umum",
                 ],
             ]  
@@ -36,7 +36,7 @@ Route::prefix('public')->group(function () {
 
         return response()->json($data);
     });
-    Route::get('/listing-locations/0', function () {
+    Route::get('/listing-locations/1', function () {
         $locations = [
             'status' => true,
             'message' => 'Show All Listing Success',
@@ -101,7 +101,7 @@ Route::prefix('public')->group(function () {
             'status' => true,
             'message' => 'Show Listing By Category Id Success',
             'data' => [
-                1 => [
+                2 => [
                     [
                         "id" => 1,
                         "name" => "Sultan Ayam Geprek Samata",
@@ -117,7 +117,7 @@ Route::prefix('public')->group(function () {
                         "longitude" => 119.49466
                     ]
                 ],
-                2 => [
+                3 => [
                     [
                         "id" => 3,
                         "name" => "Bukit Samata",
@@ -126,7 +126,7 @@ Route::prefix('public')->group(function () {
                         "longitude" => 119.49733
                     ],
                 ],
-                3 => [
+                4 => [
                     [
                         "id" => 4,
                         "name" => "UPT Perpustakaan Syekh Yusuf UIN Alauddin Makassar",
