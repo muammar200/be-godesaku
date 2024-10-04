@@ -16,6 +16,10 @@ Route::prefix('public')->group(function () {
             'message' => 'Show Listing Categories Success',
             'data' =>[
                 [
+                    "id" => 0,
+                    "name" => "All",
+                ],
+                [
                     "id" => 1,
                     "name" => "BumDes",
                 ],
