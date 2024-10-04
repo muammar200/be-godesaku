@@ -32,7 +32,7 @@ Route::prefix('public')->group(function () {
 
         return response()->json($data);
     });
-    Route::get('/listing-locations', function () {
+    Route::get('/listing-locations/0', function () {
         $locations = [
             'status' => true,
             'message' => 'Show All Listing Success',
