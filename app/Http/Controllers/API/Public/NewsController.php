@@ -14,7 +14,7 @@ class NewsController extends Controller
     {
         $page = $request->input('page', 1);
 
-        $news = News::latest()->paginate(10, ["*"], 'page', $page);
+        $news = News::latest()->paginate(9, ["*"], 'page', $page);
 
         $data = [
             'status' => true,
@@ -37,16 +37,16 @@ class NewsController extends Controller
         return response()->json($data, 200);
     }
 
-    // public function latestNews()
-    // {
-    //     $news = News::latest()->limit(6)->get();
+    public function latestNews()
+    {
+        $news = News::latest()->limit(7)->get();
 
-    //     $data = [
-    //         'status' => true,
-    //         'message' => 'Show Latest News Success',
-    //         'data' => NewsResource::collection($news),
-    //     ];
+        $data = [
+            'status' => true,
+            'message' => 'Show Latest News Success',
+            'data' => NewsResource::collection($news),
+        ];
 
-    //     return response()->json($data, 200);
-    // }
+        return response()->json($data, 200);
+    }
 }
