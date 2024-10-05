@@ -18,7 +18,7 @@ class NewsController extends Controller
 
         $data = [
             'status' => true,
-            'message' => 'Show News Success',
+            'message' => 'Menampilkan Berita',
             'meta' => new MetaPaginateResource($news),
             'data' => NewsResource::collection($news),
         ];
@@ -30,7 +30,7 @@ class NewsController extends Controller
     {
         $data = [
             'status' => true,
-            'message' => 'Get News By Slug Success',
+            'message' => 'Get Berita By Slug',
             'data' => new NewsResource($news),
         ];
 
@@ -43,7 +43,7 @@ class NewsController extends Controller
 
         $data = [
             'status' => true,
-            'message' => 'Show Latest News Success',
+            'message' => 'Menampilkan Berita Terbaru',
             'data' => NewsResource::collection($news),
         ];
 

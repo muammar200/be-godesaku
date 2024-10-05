@@ -18,7 +18,7 @@ class TravelArticleController extends Controller
 
         $data = [
             'status' => true,
-            'message' => 'Show Travel Articles Success',
+            'message' => 'Menampilkan Artikel Wisata',
             'meta' => new MetaPaginateResource($news),
             'data' => TravelArticleResource::collection($news),
         ];
@@ -30,7 +30,7 @@ class TravelArticleController extends Controller
     {
         $data = [
             'status' => true,
-            'message' => 'Get Travel Article By Slug Success',
+            'message' => 'Menampilkan Artikel Wisata By Slug',
             'data' => new TravelArticleResource($travel_article),
         ];
 
