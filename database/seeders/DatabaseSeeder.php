@@ -2,6 +2,17 @@
 
 namespace Database\Seeders;
 
+use App\Models\BirthType;
+use App\Models\CanRead;
+use App\Models\Death;
+use App\Models\Education;
+use App\Models\FamilyPosition;
+use App\Models\MaritalStatus;
+use App\Models\MarriageDivorce;
+use App\Models\MasterPopulation;
+use App\Models\Profession;
+use App\Models\Religion;
+use App\Models\TravelArticle;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,14 +24,84 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call([
+            NewsSeeder::class,
+        ]);
         $this->call([
             TravelArticleSeeder::class,
         ]);
+
+        // related table master_populations
+        $this->call([
+            BloodTypeSeeder::class,
+        ]);
+        $this->call([
+            GenderSeeder::class,
+        ]);
+        $this->call([
+            ReligionSeeder::class,
+        ]);
+        $this->call([
+            EducationSeeder::class,
+        ]);
+        $this->call([
+            ProfessionSeeder::class,
+        ]);
+        $this->call([
+            DusunSeeder::class,
+        ]);
+        $this->call([
+            CanReadSeeder::class,
+        ]);
+        $this->call([
+            CivicSeeder::class,
+        ]);
+        $this->call([
+            EntryTypeSeeder::class,
+        ]);
+        $this->call([
+            ExitTypeSeeder::class,
+        ]);
+
+        // table master_populations
+        $this->call([
+            MasterPopulationSeeder::class,
+        ]);
+
+
+        // related table births
+        $this->call([
+            TimeSeeder::class,
+        ]);
+        $this->call([
+            BirthTypeSeeder::class,
+        ]);
+        $this->call([
+            BirthAttendantSeeder::class,
+        ]);
+        $this->call([
+            TypeOfBirthCertificateSeeder::class,
+        ]);
+        $this->call([
+            FamilyPositionSeeder::class,
+        ]);
+
+        $this->call([
+            BirthSeeder::class,
+        ]);
+
+        // $this->call([
+        //     DeathSeeder::class,
+        // ]);
+
+        // table marriage_divorce
+        $this->call([
+            MaritalStatusSeeder::class,
+        ]);
+        $this->call([
+            MarriageDivorceSeeder::class,
+        ]);
+
+        
     }
 }
