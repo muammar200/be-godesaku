@@ -154,7 +154,7 @@ Route::prefix('public')->group(function () {
         } else {
             return response()->json([
                 'status' => false,
-                'message' => 'Location not found',
+            'message' => 'Location not found',
                 'data' => []
             ], 404); 
         }
@@ -170,12 +170,14 @@ Route::prefix('public')->group(function () {
     //     });
     // });
     Route::get('/populations/generals', [API\Public\PopulationController::class, 'countGenerals']);
+    // Route::get('/populations/ages', [API\Public\PopulationController::class, 'countAges']);
+    Route::get('/populations/deaths', [API\Public\PopulationController::class, 'countDeaths']);
     Route::get('/populations/genders', [API\Public\PopulationController::class, 'countGenders']);
-    Route::get('/populations/civics', [API\Public\PopulationController::class, 'countCivics']);
-    Route::get('/populations/religions', [API\Public\PopulationController::class, 'countReligions']);
     Route::get('/populations/educations', [API\Public\PopulationController::class, 'countEducations']);
     Route::get('/populations/professions', [API\Public\PopulationController::class, 'countProfessions']);
     Route::get('/populations/marriages', [API\Public\PopulationController::class, 'countMarriageStatuses']);
+    Route::get('/populations/religions', [API\Public\PopulationController::class, 'countReligions']);
+    Route::get('/populations/civics', [API\Public\PopulationController::class, 'countCivics']);
 
     Route::get('/news', [API\Public\NewsController::class, 'index']);
     Route::get('/latest-news', [API\Public\NewsController::class, 'latestNews']);
