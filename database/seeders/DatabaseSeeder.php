@@ -102,6 +102,9 @@ class DatabaseSeeder extends Seeder
             MarriageDivorceSeeder::class,
         ]);
 
-        
+
+        $this->call([
+            SliderSeeder::class,
+        ]);
     }
 }
