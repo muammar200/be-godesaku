@@ -13,8 +13,9 @@ class TravelArticleController extends Controller
     public function index(Request $request)
     {
         $page = $request->input('page', 1);
+        $perpage = $request->input('perpage', 10);
 
-        $news = TravelArticle::latest()->paginate(10, ["*"], 'page', $page);
+        $news = TravelArticle::latest()->paginate($perpage, ["*"], 'page', $page);
 
         $data = [
             'status' => true,
