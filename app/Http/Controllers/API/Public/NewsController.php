@@ -13,8 +13,9 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         $page = $request->input('page', 1);
+        $perpage = $request->input("perpage", 9);
 
-        $news = News::latest()->paginate(9, ["*"], 'page', $page);
+        $news = News::latest()->paginate($perpage, ["*"], 'page', $page);
 
         $data = [
             'status' => true,
@@ -37,13 +38,33 @@ class NewsController extends Controller
         return response()->json($data, 200);
     }
 
-    public function latestNews()
+    public function latestNews(Request $request)
     {
-        $news = News::latest()->limit(7)->get();
+        $limit = $request->input('limit', 7);
+        $news = News::latest()->limit($limit)->get();
 
         $data = [
             'status' => true,
             'message' => 'Menampilkan Berita Terbaru',
+            'meta' => [
+                'limit' => $limit
+            ],
+            'data' => NewsResource::collection($news),
+        ];
+
+        return response()->json($data, 200);
+    }
+    public function latestNewsExceptVisited(News $news, Request $request)
+    {
+        $limit = $request->input('limit', 7);
+        $news = News::latest()->where('id', '!=', $news->id)->limit($limit)->get();
+
+        $data = [
+            'status' => true,
+            'message' => 'Menampilkan Berita Terbaru Kecuali yang Sedang Dikunjungi',
+            'meta' => [
+                'limit' => $limit
+            ],
             'data' => NewsResource::collection($news),
         ];
 
