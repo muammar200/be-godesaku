@@ -182,6 +182,7 @@ Route::prefix('public')->group(function () {
     Route::prefix('home')->group(function(){
         Route::get('/sliders', [API\Public\HomeController::class, 'slider']);
         Route::get('/contacts', [API\Public\HomeController::class, 'contact']);
+        Route::get('/social-media', [API\Public\HomeController::class, 'socialMedia']);
     });
 
     Route::get('/news', [API\Public\NewsController::class, 'index']);
