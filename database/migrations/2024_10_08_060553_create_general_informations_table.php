@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('village_name')->nullable();
             $table->string('subdistrict_name')->nullable();
             $table->string('district_name')->nullable();
+            $table->string('province_name')->nullable();
             $table->string('latitude_coordinates')->nullable();
             $table->string('longitude_coordinates')->nullable();
             $table->text('profile_summary')->nullable();

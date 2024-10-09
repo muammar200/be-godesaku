@@ -15,6 +15,7 @@ class GeneralInformation extends Model
         'village_name',
         'subdistrict_name',
         'district_name',
+        'province_name',
         'latitude_coordinates',
         'longitude_coordinates',
         'profile_summary',

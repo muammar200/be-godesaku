@@ -62,4 +62,27 @@ class HomeController extends Controller
 
         return response()->json($data, 200); 
     }
+
+    public function showGeneralInformation()
+    {
+        $village_name = GeneralInformation::where('id', 1)->value('village_name');
+        $subdistrict_name = GeneralInformation::where('id', 1)->value('subdistrict_name');
+        $district_name = GeneralInformation::where('id', 1)->value('district_name');
+        $province_name = GeneralInformation::where('id', 1)->value('province_name');
+        $village_logo = GeneralInformation::where('id', 1)->value('village_logo');
+
+        $data = [
+            'status' => true,
+            'message' => 'Berhasil Menampilkan Informasi Desa',
+            'data' => [
+                'nama' => $village_name,
+                'kecamatan' => $subdistrict_name,
+                'kabupaten' => $district_name,
+                'provinsi' => $province_name,
+                'logo' => url('storage/images/generals/' . $village_logo),
+            ],
+        ];
+
+        return response()->json($data, 200);
+    }
 }

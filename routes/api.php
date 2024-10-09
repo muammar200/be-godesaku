@@ -184,6 +184,7 @@ Route::prefix('public')->group(function () {
         Route::get('/contacts', [API\Public\HomeController::class, 'contact']);
         Route::get('/social-media', [API\Public\HomeController::class, 'socialMedia']);
         Route::get('/profile-summary', [API\Public\HomeController::class, 'profileSummary']);
+        Route::get('/general-information', [API\Public\HomeController::class, 'showGeneralInformation']);
     });
 
     Route::get('/news', [API\Public\NewsController::class, 'index']);
