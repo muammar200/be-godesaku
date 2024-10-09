@@ -102,4 +102,34 @@ class HomeController extends Controller
 
         return response()->json($data, 200);
     }
+
+    public function showGovernmentStructure()
+    {
+        $government_structure = GeneralInformation::where('id', 1)->value('government_structure');
+
+        $data = [
+            'status' => true,
+            'message' => 'Berhasil Menampilkan Url Gambar Struktur Pemerintahan Desa',
+            'data' => [
+                'image' => url('storage/images/generals/' . $government_structure),
+            ],
+        ];
+
+        return response()->json($data, 200);
+    }
+
+    public function showOrganizationStructure()
+    {
+        $organization_structure = GeneralInformation::where('id', 1)->value('organization_structure');
+
+        $data = [
+            'status' => true,
+            'message' => 'Berhasil Menampilkan Url Gambar Struktur Organisasi Desa',
+            'data' => [
+                'image' => url('storage/images/generals/' . $organization_structure),
+            ],
+        ];
+
+        return response()->json($data, 200);
+    }
 }
