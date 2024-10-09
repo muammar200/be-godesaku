@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Public\SliderResource;
 use App\Http\Resources\Public\ContactResource;
 use App\Http\Resources\Public\SocialMediaResource;
+use App\Models\GeneralInformation;
 
 class HomeController extends Controller
 {
@@ -44,6 +45,19 @@ class HomeController extends Controller
             'status' => true,
             'message' => 'Berhasil Menampilkan Sosial Media Desa',
             'data' => SocialMediaResource::collection($contacts),
+        ];
+
+        return response()->json($data, 200); 
+    }
+
+    public function profileSummary()
+    {
+        $profile_summary = GeneralInformation::pluck('profile_summary');
+
+        $data = [
+            'status' => true,
+            'message' => 'Berhasil Menampilkan Profil Singkat Desa',
+            'data' => $profile_summary,
         ];
 
         return response()->json($data, 200); 
