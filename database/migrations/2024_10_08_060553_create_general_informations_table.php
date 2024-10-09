@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('latitude_coordinates')->nullable();
             $table->string('longitude_coordinates')->nullable();
             $table->text('profile_summary')->nullable();
+            $table->text('area_map')->nullable();
             $table->text('vision')->nullable();
             $table->text('mission')->nullable();
             $table->text('history')->nullable();

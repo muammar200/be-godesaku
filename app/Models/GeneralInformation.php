@@ -19,6 +19,7 @@ class GeneralInformation extends Model
         'latitude_coordinates',
         'longitude_coordinates',
         'profile_summary',
+        'area_map',
         'vision',
         'mission',
         'history',

@@ -52,12 +52,14 @@ class HomeController extends Controller
 
     public function profileSummary()
     {
-        $profile_summary = GeneralInformation::pluck('profile_summary');
+        $profile_summary = GeneralInformation::where('id', 1)->value('profile_summary');
 
         $data = [
             'status' => true,
             'message' => 'Berhasil Menampilkan Profil Singkat Desa',
-            'data' => $profile_summary,
+            'data' => [
+                'deskripsi' => $profile_summary
+            ],
         ];
 
         return response()->json($data, 200); 
@@ -131,5 +133,52 @@ class HomeController extends Controller
         ];
 
         return response()->json($data, 200);
+    }
+
+    public function showVisionMission()
+    {
+        $vision = GeneralInformation::where('id', 1)->value('vision');
+        $mission = GeneralInformation::where('id', 1)->value('mission');
+
+        $data = [
+            'status' => true,
+            'message' => 'Berhasil Menampilkan Visi dan Misi Desa',
+            'data' => [
+                'visi' => $vision,
+                'misi' => $mission,
+            ],
+        ];
+
+        return response()->json($data, 200);
+    }
+
+    public function showHistory()
+    {
+        $history = GeneralInformation::where('id', 1)->value('history');
+
+        $data = [
+            'status' => true,
+            'message' => 'Berhasil Menampilkan Sejarah Desa',
+            'data' => [
+                'deskripsi' => $history
+            ]
+        ];
+
+        return response()->json($data, 200);
+    }
+
+    public function showAreaDesc()
+    {
+        $area_desc = GeneralInformation::where('id', 1)->value('area_map');
+
+        $data = [
+            'status' => true,
+            'message' => 'Berhasil Menampilkan Deskripsi Desa',
+            'data' => [
+                'deskripsi' => $area_desc
+            ]
+        ];
+
+        return response()->json($data, 200);   
     }
 }
