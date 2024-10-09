@@ -85,4 +85,21 @@ class HomeController extends Controller
 
         return response()->json($data, 200);
     }
+
+    public function showLocation()
+    {
+        $latitude = GeneralInformation::where('id', 1)->value('latitude_coordinates');
+        $longitude = GeneralInformation::where('id', 1)->value('longitude_coordinates');
+
+        $data = [
+            'status' => true,
+            'message' => 'Berhasil Menampilkan Titik Lokasi Desa',
+            'data' => [
+                'latitude' => $latitude,
+                'longitude' => $longitude,
+            ],
+        ];
+
+        return response()->json($data, 200);
+    }
 }
