@@ -202,4 +202,7 @@ Route::prefix('public')->group(function () {
     Route::get('/travel-articles/{travel_article}', [API\Public\TravelArticleController::class, 'show']);
 
     Route::get('/activities', [API\Public\ActivityController::class, 'showActivity']);
+
+    Route::get('/products', [API\Public\ProductController::class, 'index']);
+    Route::get('/products/{product}', [API\Public\ProductController::class, 'show']);
 });
