@@ -215,6 +215,6 @@ Route::prefix('public')->group(function () {
     // Route::get('/bansos', [API\Public\BansosController::class, 'index']);
     // Route::get('/bansos/{nik}', [API\Public\BansosController::class, 'getBansosByNik']);
 
-    // Route::get('/facilities', [API\Public\FacilityController::class, 'index']);
-    // Route::get('/facilities/table', [API\Public\FacilityController::class, 'index2']);
+    Route::get('/facilities', [API\Public\FacilityController::class, 'index']);
+    Route::get('/facilities/table', [API\Public\FacilityController::class, 'index2']);
 });
