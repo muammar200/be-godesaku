@@ -15,13 +15,13 @@ class ProductController extends Controller
         $page = $request->input('page', 1);
         $perpage = $request->input("perpage", 9);
 
-        $news = Product::latest()->paginate($perpage, ["*"], 'page', $page);
+        $products = Product::latest()->paginate($perpage, ["*"], 'page', $page);
 
         $data = [
             'status' => true,
             'message' => 'Menampilkan Produk Desa',
-            'meta' => new MetaPaginateResource($news),
-            'data' => ProductResource::collection($news),
+            'meta' => new MetaPaginateResource($products),
+            'data' => ProductResource::collection($products),
         ];
 
         return response()->json($data, 200);
@@ -33,6 +33,23 @@ class ProductController extends Controller
             'status' => true,
             'message' => 'Menampilkan Produk Desa By Slug',
             'data' => new ProductResource($product),
+        ];
+
+        return response()->json($data, 200);
+    }
+
+    public function otherProduct(Request $request, Product $product)
+    {
+        $limit = $request->input('limit', 4);
+        $products = Product::latest()->where('id', '!=', $product->id)->limit($limit)->get();
+
+        $data = [
+            'status' => true,
+            'message' => 'Menampilkan Produk Desa Lainnya',
+            'meta' => [
+                'limit' => $limit
+            ],
+            'data' => ProductResource::collection($products),
         ];
 
         return response()->json($data, 200);

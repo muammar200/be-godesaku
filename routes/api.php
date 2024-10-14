@@ -207,7 +207,7 @@ Route::prefix('public')->group(function () {
 
     Route::get('/products', [API\Public\ProductController::class, 'index']);
     Route::get('/products/{product}', [API\Public\ProductController::class, 'show']);
-    // Route::get('/other-products/{product}', [API\Public\ProductController::class, 'otherProduct']);
+    Route::get('/other-products/{product}', [API\Public\ProductController::class, 'otherProduct']);
 
     Route::get('/farm-produces/highest', [API\Public\FarmProduceController::class, 'highestProductionLevel']);
     Route::get('/farm-produces/others', [API\Public\FarmProduceController::class, 'otherProductionLevels']);
