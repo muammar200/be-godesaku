@@ -37,4 +37,21 @@ class TravelArticleController extends Controller
 
         return response()->json($data, 200);
     }
+
+    public function exceptVisited(Request $request, TravelArticle $travel_article)
+    {
+        $page = $request->input('page', 1);
+        $perpage = $request->input('perpage', 10);
+
+        $news = TravelArticle::where('slug', '!=', $travel_article->slug)->latest()->paginate($perpage, ["*"], 'page', $page);
+
+        $data = [
+            'status' => true,
+            'message' => 'Menampilkan Artikel Wisata kecuali yang sedang Dikunjungi',
+            'meta' => new MetaPaginateResource($news),
+            'data' => TravelArticleResource::collection($news),
+        ];
+
+        return response()->json($data, 200);
+    }
 }

@@ -185,6 +185,7 @@ Route::prefix('public')->group(function () {
         Route::get('/social-media', [API\Public\HomeController::class, 'socialMedia']);
         Route::get('/profile-summary', [API\Public\HomeController::class, 'profileSummary']);
         Route::get('/general-information', [API\Public\HomeController::class, 'showGeneralInformation']);
+        // Route::get('/village-information', [API\Public\HomeController::class, 'showVillageInformation']);
         Route::get('/location', [API\Public\HomeController::class, 'showLocation']);
         Route::get('/government-structure', [API\Public\HomeController::class, 'showGovernmentStructure']);
         Route::get('/organization-structure', [API\Public\HomeController::class, 'showOrganizationStructure']);
@@ -200,12 +201,20 @@ Route::prefix('public')->group(function () {
 
     Route::get('/travel-articles', [API\Public\TravelArticleController::class, 'index']);
     Route::get('/travel-articles/{travel_article}', [API\Public\TravelArticleController::class, 'show']);
+    Route::get('/travel-articles-except/{travel_article}', [API\Public\TravelArticleController::class, 'exceptVisited']);
 
     Route::get('/activities', [API\Public\ActivityController::class, 'showActivity']);
 
     Route::get('/products', [API\Public\ProductController::class, 'index']);
     Route::get('/products/{product}', [API\Public\ProductController::class, 'show']);
+    // Route::get('/other-products/{product}', [API\Public\ProductController::class, 'otherProduct']);
 
     Route::get('/farm-produces/highest', [API\Public\FarmProduceController::class, 'highestProductionLevel']);
     Route::get('/farm-produces/others', [API\Public\FarmProduceController::class, 'otherProductionLevels']);
+
+    // Route::get('/bansos', [API\Public\BansosController::class, 'index']);
+    // Route::get('/bansos/{nik}', [API\Public\BansosController::class, 'getBansosByNik']);
+
+    // Route::get('/facilities', [API\Public\FacilityController::class, 'index']);
+    // Route::get('/facilities/table', [API\Public\FacilityController::class, 'index2']);
 });
