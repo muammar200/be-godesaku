@@ -130,7 +130,7 @@ class PopulationController extends Controller
                 'Buddha' => $buddha,
                 'Kristen Katolik' => $kristen_katolik,
                 'Konghucu' => $konghucu,
-                'Lainnya' => $others,
+                'Kepercayaan Lainnya' => $others,
             ],
         ];
 
