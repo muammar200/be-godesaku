@@ -176,8 +176,8 @@ class PopulationController extends Controller
     public function countMarriageStatuses()
     {
         $maritalStatuses = [
-            1 => 'Belum Kawin',
-            2 => 'Kawin',
+            2 => 'Menikah',
+            1 => 'Belum Menikah',
             3 => 'Cerai Hidup',
             4 => 'Cerai Mati',
             5 => 'Kawin Tercatat',
@@ -196,13 +196,13 @@ class PopulationController extends Controller
         $responseData = [];
         foreach ($maritalStatuses as $id => $status) {
             if ($id == 3 || $id == 4) {
-                $responseData['Cerai'] = ($responseData['Cerai'] ?? 0) + $counts->get($id, 0);
+                $responseData['Bercerai'] = ($responseData['Bercerai'] ?? 0) + $counts->get($id, 0);
             } else {
                 $responseData[$status] = $counts->get($id, 0);
             }
         }
 
-        $responseData['Cerai'] = $responseData['Cerai'] ?? 0;
+        $responseData['Bercerai'] = $responseData['Bercerai'] ?? 0;
 
         $data = [
             'status' => true,
