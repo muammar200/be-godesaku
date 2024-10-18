@@ -144,7 +144,7 @@ class FacilityController extends Controller
 
         $data = [
             'status' => true,
-            'message' => 'Menampilkan Semua Tempat Ibadah',
+            'message' => 'Menampilkan Semua Destinasi Wisata',
             'data' => [
                 'Pantai' => FacilityWorshipResource::collection($pantai),
                 'Pegunungan' => FacilityWorshipResource::collection($pegunungan),
