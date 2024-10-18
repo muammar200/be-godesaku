@@ -137,14 +137,32 @@ class FacilitySeeder extends Seeder
 
         // DB::table('facilities')->insert($facilities);
 
+        // $facilities = [
+        //     ['name' => 'Pantai Indah', 'type_facility_id' => 10],
+        //     ['name' => 'Air Terjun Cinta', 'type_facility_id' => 10],
+        //     ['name' => 'Gunung Merah', 'type_facility_id' => 10],
+        //     ['name' => 'Danau Biru', 'type_facility_id' => 10],
+        //     ['name' => 'Kebun Binatang Sejahtera', 'type_facility_id' => 10],
+        //     ['name' => 'Museum Sejarah', 'type_facility_id' => 10],
+        //     ['name' => 'Taman Bunga Nusantara', 'type_facility_id' => 10],
+        // ];
+
+        // DB::table('facilities')->insert($facilities);
+
         $facilities = [
-            ['name' => 'Pantai Indah', 'type_facility_id' => 10],
-            ['name' => 'Air Terjun Cinta', 'type_facility_id' => 10],
-            ['name' => 'Gunung Merah', 'type_facility_id' => 10],
-            ['name' => 'Danau Biru', 'type_facility_id' => 10],
-            ['name' => 'Kebun Binatang Sejahtera', 'type_facility_id' => 10],
-            ['name' => 'Museum Sejarah', 'type_facility_id' => 10],
-            ['name' => 'Taman Bunga Nusantara', 'type_facility_id' => 10],
+            ['name' => 'Masjid Al-Ikhlas', 'type_facility_id' => 5, 'category_facility_id' => 1, 'location' => 'Desa Biringkanaya, Kecamatan Biringkanaya'],
+            ['name' => 'Masjid Yaqin', 'type_facility_id' => 5, 'category_facility_id' => 1, 'location' => 'Desa Biringkanaya, Kecamatan Biringkanaya'],
+            ['name' => 'Katolik Berkat', 'type_facility_id' => 5, 'category_facility_id' => 2, 'location' => 'Desa Biringkanaya, Kecamatan Biringkanaya'],
+            ['name' => 'Katolik Santo Paulus', 'type_facility_id' => 5, 'category_facility_id' => 2, 'location' => 'Desa Biringkanaya, Kecamatan Biringkanaya'],
+            ['name' => 'Gereja Berkat', 'type_facility_id' => 5, 'category_facility_id' => 3, 'location' => 'Desa Biringkanaya, Kecamatan Biringkanaya'],
+            ['name' => 'Gereja Santo Petrus', 'type_facility_id' => 5, 'category_facility_id' => 3, 'location' => 'Desa Biringkanaya, Kecamatan Biringkanaya'],
+            ['name' => 'Pura Wedha', 'type_facility_id' => 5, 'category_facility_id' => 4, 'location' => 'Desa Biringkanaya, Kecamatan Biringkanaya'],
+            ['name' => 'Pura Bakti', 'type_facility_id' => 5, 'category_facility_id' => 4, 'location' => 'Desa Biringkanaya, Kecamatan Biringkanaya'],
+            ['name' => 'Pura Bakti', 'type_facility_id' => 5, 'category_facility_id' => 4, 'location' => 'Desa Biringkanaya, Kecamatan Biringkanaya'],
+            ['name' => 'Vihara Wedha', 'type_facility_id' => 5, 'category_facility_id' => 5, 'location' => 'Desa Biringkanaya, Kecamatan Biringkanaya'],
+            ['name' => 'Vihara Bakti', 'type_facility_id' => 5, 'category_facility_id' => 5, 'location' => 'Desa Biringkanaya, Kecamatan Biringkanaya'],
+            ['name' => 'Klenteng Wedha', 'type_facility_id' => 5, 'category_facility_id' => 6, 'location' => 'Desa Biringkanaya, Kecamatan Biringkanaya'],
+            ['name' => 'Klenteng Bakti', 'type_facility_id' => 5, 'category_facility_id' => 6, 'location' => 'Desa Biringkanaya, Kecamatan Biringkanaya'],
         ];
 
         DB::table('facilities')->insert($facilities);
