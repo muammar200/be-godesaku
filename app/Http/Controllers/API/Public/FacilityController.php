@@ -49,11 +49,12 @@ class FacilityController extends Controller
 
     public function countWorshipFacility()
     {
-        $totals = Facility::selectRaw('category_facilities.name, category_facilities.icon, COUNT(facilities.id) as jumlah')
+        $totals = Facility::selectRaw('category_facilities.id, category_facilities.name, category_facilities.icon, COUNT(facilities.id) as jumlah')
         ->rightJoin('category_facilities', 'facilities.category_facility_id', '=', 'category_facilities.id')
-            ->whereBetween('category_facilities.id', [1, 6])
-        ->groupBy('category_facilities.name', 'category_facilities.icon')
-        ->get();
+        ->whereBetween('category_facilities.id', [1, 6])
+            ->groupBy('category_facilities.id', 'category_facilities.name', 'category_facilities.icon')
+            ->orderBy('category_facilities.id')
+            ->get();
 
         $data = [
             'status' => true,
