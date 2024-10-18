@@ -50,8 +50,8 @@ class FacilityController extends Controller
     public function countWorshipFacility()
     {
         $totals = Facility::selectRaw('category_facilities.id, category_facilities.name, category_facilities.icon, COUNT(facilities.id) as jumlah')
-        ->rightJoin('category_facilities', 'facilities.category_facility_id', '=', 'category_facilities.id')
-        ->whereBetween('category_facilities.id', [1, 6])
+            ->rightJoin('category_facilities', 'facilities.category_facility_id', '=', 'category_facilities.id')
+            ->whereBetween('category_facilities.id', [1, 6])
             ->groupBy('category_facilities.id', 'category_facilities.name', 'category_facilities.icon')
             ->orderBy('category_facilities.id')
             ->get();
@@ -84,6 +84,73 @@ class FacilityController extends Controller
                 'Pura' => FacilityWorshipResource::collection($pura),
                 'Vihara' => FacilityWorshipResource::collection($vihara),
                 'Klenteng' => FacilityWorshipResource::collection($klenteng),
+            ]
+        ];
+
+        return response()->json($data, 200);
+    }
+
+    // public function countTouristDestination()
+    // {
+    //     $totals = Facility::selectRaw('category_facilities.id, category_facilities.name, category_facilities.icon, COUNT(facilities.id) as jumlah')
+    //     ->rightJoin('category_facilities', 'facilities.category_facility_id', '=', 'category_facilities.id')
+    //     ->whereBetween('category_facilities.id', [7, 11])
+    //         ->groupBy('category_facilities.id', 'category_facilities.name', 'category_facilities.icon')
+    //         ->orderBy('category_facilities.id')
+    //         ->get();
+
+    //     $data = [
+    //         'status' => true,
+    //         'message' => 'Menampilkan Jumlah Destinasi Wisata dengan Icon',
+    //         'data' => FacilityResource::collection($totals),
+    //     ];
+
+    //     return response()->json($data, 200);
+    // }
+    public function countTouristDestination()
+    {
+        $totals = Facility::selectRaw("
+            category_facilities.id, 
+            CASE 
+                WHEN category_facilities.id = 7 THEN 'Pantai dan Laut' 
+                ELSE category_facilities.name 
+            END as name, 
+            category_facilities.icon, 
+            COUNT(facilities.id) as jumlah
+        ")
+            ->rightJoin('category_facilities', 'facilities.category_facility_id', '=', 'category_facilities.id')
+            ->whereBetween('category_facilities.id', [7, 11])
+            ->groupBy('category_facilities.id', 'category_facilities.name', 'category_facilities.icon')
+            ->orderBy('category_facilities.id')
+            ->get();
+
+        $data = [
+            'status' => true,
+            'message' => 'Menampilkan Jumlah Destinasi Wisata dengan Icon',
+            'data' => FacilityResource::collection($totals),
+        ];
+
+        return response()->json($data, 200);
+    }
+
+
+    public function getTouristDestination()
+    {
+        $pantai = Facility::where('category_facility_id', 7)->select('facilities.name', 'facilities.location')->get();
+        $pegunungan = Facility::where('category_facility_id', 8)->select('facilities.name', 'facilities.location')->get();
+        $museum = Facility::where('category_facility_id', 9)->select('facilities.name', 'facilities.location')->get();
+        $kuliner = Facility::where('category_facility_id', 10)->select('facilities.name', 'facilities.location')->get();
+        $wisataAlam = Facility::where('category_facility_id', 11)->select('facilities.name', 'facilities.location')->get();
+
+        $data = [
+            'status' => true,
+            'message' => 'Menampilkan Semua Tempat Ibadah',
+            'data' => [
+                'Pantai' => FacilityWorshipResource::collection($pantai),
+                'Pegunungan' => FacilityWorshipResource::collection($pegunungan),
+                'Museum' => FacilityWorshipResource::collection($museum),
+                'Kuliner' => FacilityWorshipResource::collection($kuliner),
+                'Wisata Alam' => FacilityWorshipResource::collection($wisataAlam),
             ]
         ];
 

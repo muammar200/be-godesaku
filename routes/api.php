@@ -219,4 +219,6 @@ Route::prefix('public')->group(function () {
     Route::get('/facilities/list', [API\Public\FacilityController::class, 'index2']);
     Route::get('/worship-facilities', [API\Public\FacilityController::class, 'countWorshipFacility']);
     Route::get('/worship-facilities/list', [API\Public\FacilityController::class, 'getWorshipFacility']);
+    Route::get('/tourist-destination', [API\Public\FacilityController::class, 'countTouristDestination']);
+    Route::get('/tourist-destination/list', [API\Public\FacilityController::class, 'getTouristDestination']);
 });
