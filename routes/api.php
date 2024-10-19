@@ -221,4 +221,8 @@ Route::prefix('public')->group(function () {
     Route::get('/worship-facilities/list', [API\Public\FacilityController::class, 'getWorshipFacility']);
     Route::get('/tourist-destination', [API\Public\FacilityController::class, 'countTouristDestination']);
     Route::get('/tourist-destination/list', [API\Public\FacilityController::class, 'getTouristDestination']);
+    
+    Route::get('/apb-desa/generals', [API\Public\ApbDesaController::class, 'index']);
+    Route::get('/apb-desa/revenues', [API\Public\ApbDesaController::class, 'countRevenue']);
+    Route::get('/apb-desa/revenues/list', [API\Public\ApbDesaController::class, 'getRevenue']);
 });
