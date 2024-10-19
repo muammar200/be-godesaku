@@ -13,17 +13,47 @@ class NameApbDesaSeeder extends Seeder
      */
     public function run(): void
     {
+        // NameApbDesa::create([
+        //     'category_apb_desa_id' => 1,
+        //     'name' => 'Pendapatan asli desa (PADes)',            
+        // ]);
+        // NameApbDesa::create([
+        //     'category_apb_desa_id' => 1,
+        //     'name' => 'Pendapatan transfer',            
+        // ]);
+        // NameApbDesa::create([
+        //     'category_apb_desa_id' => 1,
+        //     'name' => 'Pendapatan lainnya',            
+        // ]);
+
         NameApbDesa::create([
-            'category_apb_desa_id' => 1,
-            'name' => 'Pendapatan asli desa (PADes)',            
+            'category_apb_desa_id' => 2,
+            'name' => 'Bidang Penyelenggaraan Pemerintahan Desa',            
         ]);
         NameApbDesa::create([
-            'category_apb_desa_id' => 1,
-            'name' => 'Pendapatan transfer',            
+            'category_apb_desa_id' => 2,
+            'name' => 'Bidang Pembangunan Desa',            
         ]);
         NameApbDesa::create([
-            'category_apb_desa_id' => 1,
-            'name' => 'Pendapatan lainnya',            
+            'category_apb_desa_id' => 2,
+            'name' => 'Bidang Pembinaan Kemasyarakatan',            
+        ]);
+        NameApbDesa::create([
+            'category_apb_desa_id' => 2,
+            'name' => 'Bidang Pemberdayaan Masyarakat',            
+        ]);
+        NameApbDesa::create([
+            'category_apb_desa_id' => 2,
+            'name' => 'Bidang Penanggulangan Bencana, Keadaan Darurat, dan Mendesak Desa',            
+        ]);
+
+        NameApbDesa::create([
+            'category_apb_desa_id' => 3,
+            'name' => 'Bidang Penyelenggaraan Pemerintahan Desa',
+        ]);
+        NameApbDesa::create([
+            'category_apb_desa_id' => 3,
+            'name' => 'Bidang Pembangunan Desa',
         ]);
     }
 }

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API;
 
+// Route::get('/tes', [API\Public\PopulationController::class, 'tes']);
 Route::prefix('admin')->group(function () {
     Route::apiResource('news', API\NewsController::class);
     Route::apiResource('travel-articles', API\TravelArticleController::class);
@@ -225,4 +226,6 @@ Route::prefix('public')->group(function () {
     Route::get('/apb-desa/generals', [API\Public\ApbDesaController::class, 'index']);
     Route::get('/apb-desa/revenues', [API\Public\ApbDesaController::class, 'countRevenue']);
     Route::get('/apb-desa/revenues/list', [API\Public\ApbDesaController::class, 'getRevenue']);
+    Route::get('/apb-desa/expenses', [API\Public\ApbDesaController::class, 'countExpense']);
+    Route::get('/apb-desa/expenses/list', [API\Public\ApbDesaController::class, 'getExpense']);
 });

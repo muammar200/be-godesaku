@@ -21,11 +21,16 @@ class ApbDesaController extends Controller
             $query->where('name', 'Pendapatan Desa');
         })->where('year', $currentYear)->sum('amount');
 
+        $totalExpenses = DetailApbDesa::whereHas('nameApbDesa.categoryApbDesa', function ($query) {
+            $query->where('name', 'Belanja Desa');
+        })->where('year', $currentYear)->sum('amount');
+
         $data = [
             'status' => true,
             'message' => 'Menampilkan APB Desa Tahun ' . $currentYear,
             'data' => [
-            'Pendapatan Desa' => 'Rp ' . $this->formatAmount($totalRevenues) 
+            'Pendapatan Desa' => 'Rp ' . $this->formatAmount($totalRevenues) ,
+            'Belanja Desa' => 'Rp ' . $this->formatAmount($totalExpenses) ,
             ],
         ];
 
@@ -92,6 +97,48 @@ class ApbDesaController extends Controller
         $data = [
             'status' => true,
             'message' => 'Menampilkan Detail Pendapatan Desa Tahun ' . $currentYear,
+            'data' => DetailRevenueDesaResource::collection($revenues),
+        ];
+
+        return response()->json($data, 200);
+    }
+
+    public function countExpense(Request $request)
+    {
+        $defaultYear = now()->year;
+        $currentYear = $request->input('year', $defaultYear);
+
+        $revenues = NameApbDesa::where('category_apb_desa_id', 2)->leftJoin('details_apb_desa', function ($join) use ($currentYear) {
+            $join->on('name_apb_desa.id', '=', 'details_apb_desa.name_apb_desa_id')
+            ->where('details_apb_desa.year', '=', $currentYear);
+        })
+            ->select('name_apb_desa.id', 'name_apb_desa.name', DB::raw('IFNULL(SUM(details_apb_desa.amount), 0) as total_amount'))
+            ->groupBy('name_apb_desa.id', 'name_apb_desa.name')
+            ->get();
+
+        $data = [
+            'status' => true,
+            'message' => 'Menampilkan Belanja Desa Tahun ' . $currentYear,
+            'data' => RevenueDesaResource::collection($revenues),
+        ];
+
+        return response()->json($data, 200);
+    }
+
+    public function getExpense(Request $request)
+    {
+        $defaultYear = now()->year;
+        $currentYear = $request->input('year', $defaultYear);
+
+        $revenues = NameApbDesa::with(['detailApbDesa' => function ($query) use ($currentYear) {
+            $query->where('year', $currentYear);
+        }])
+            ->where('category_apb_desa_id', 2)
+            ->get();
+
+        $data = [
+            'status' => true,
+            'message' => 'Menampilkan Detail Belanja Desa Tahun ' . $currentYear,
             'data' => DetailRevenueDesaResource::collection($revenues),
         ];
 
