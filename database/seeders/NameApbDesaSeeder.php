@@ -26,34 +26,34 @@ class NameApbDesaSeeder extends Seeder
         //     'name' => 'Pendapatan lainnya',            
         // ]);
 
-        NameApbDesa::create([
-            'category_apb_desa_id' => 2,
-            'name' => 'Bidang Penyelenggaraan Pemerintahan Desa',            
-        ]);
-        NameApbDesa::create([
-            'category_apb_desa_id' => 2,
-            'name' => 'Bidang Pembangunan Desa',            
-        ]);
-        NameApbDesa::create([
-            'category_apb_desa_id' => 2,
-            'name' => 'Bidang Pembinaan Kemasyarakatan',            
-        ]);
-        NameApbDesa::create([
-            'category_apb_desa_id' => 2,
-            'name' => 'Bidang Pemberdayaan Masyarakat',            
-        ]);
-        NameApbDesa::create([
-            'category_apb_desa_id' => 2,
-            'name' => 'Bidang Penanggulangan Bencana, Keadaan Darurat, dan Mendesak Desa',            
-        ]);
+        // NameApbDesa::create([
+        //     'category_apb_desa_id' => 2,
+        //     'name' => 'Bidang Penyelenggaraan Pemerintahan Desa',            
+        // ]);
+        // NameApbDesa::create([
+        //     'category_apb_desa_id' => 2,
+        //     'name' => 'Bidang Pembangunan Desa',            
+        // ]);
+        // NameApbDesa::create([
+        //     'category_apb_desa_id' => 2,
+        //     'name' => 'Bidang Pembinaan Kemasyarakatan',            
+        // ]);
+        // NameApbDesa::create([
+        //     'category_apb_desa_id' => 2,
+        //     'name' => 'Bidang Pemberdayaan Masyarakat',            
+        // ]);
+        // NameApbDesa::create([
+        //     'category_apb_desa_id' => 2,
+        //     'name' => 'Bidang Penanggulangan Bencana, Keadaan Darurat, dan Mendesak Desa',            
+        // ]);
 
         NameApbDesa::create([
             'category_apb_desa_id' => 3,
-            'name' => 'Bidang Penyelenggaraan Pemerintahan Desa',
+            'name' => 'Penerimaan Pembiayaan',
         ]);
         NameApbDesa::create([
             'category_apb_desa_id' => 3,
-            'name' => 'Bidang Pembangunan Desa',
+            'name' => 'Pengeluaran Pembiayaan',
         ]);
     }
 }
