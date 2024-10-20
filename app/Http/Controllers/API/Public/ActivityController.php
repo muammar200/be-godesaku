@@ -11,7 +11,7 @@ class ActivityController extends Controller
 {
     public function showActivity()
     {
-        $activities = Activity::latest()->get();
+        $activities = Activity::all();
 
         $data = [
             'status' => true,
