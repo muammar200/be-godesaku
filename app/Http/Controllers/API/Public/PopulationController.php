@@ -41,6 +41,58 @@ class PopulationController extends Controller
         return response()->json($data, 200);
     }
 
+    public function annualAgeStatistics()
+    {
+        //hitung juga yang meninggal
+
+        $currentYear = Carbon::now()->year;
+
+        // Menyiapkan array untuk menyimpan statistik per tahun
+        $annualStatistics = [];
+
+        // Looping untuk mendapatkan statistik dari 5 tahun terakhir
+        for ($year = $currentYear - 4; $year <= $currentYear; $year++) {
+            // Menghitung kategori umur untuk tahun tertentu
+            $ageGroups = [
+                'Anak-Anak 0 - 14 Tahun' => 0,
+                'Remaja 15 - 24 Tahun' => 0,
+                'Dewasa 25 - 59 Tahun' => 0,
+                'Lansia 60 Tahun Keatas' => 0,
+            ];
+
+            $populations = MasterPopulation::with('birth')->get();
+
+            foreach ($populations as $population) {
+                if ($population->birth) {
+                    // Menghitung umur berdasarkan tahun iterasi (bukan hanya tanggal lahir)
+                    $age = Carbon::createFromDate($population->birth->dob)->diffInYears(Carbon::createFromDate($year, 1, 1));
+
+                    // Memasukkan ke dalam kelompok umur yang sesuai
+                    if ($age <= 14) {
+                        $ageGroups['Anak-Anak 0 - 14 Tahun']++;
+                    } elseif ($age <= 24) {
+                        $ageGroups['Remaja 15 - 24 Tahun']++;
+                    } elseif ($age <= 59) {
+                        $ageGroups['Dewasa 25 - 59 Tahun']++;
+                    } else {
+                        $ageGroups['Lansia 60 Tahun Keatas']++;
+                    }
+                }
+            }
+
+            // Menyimpan data statistik per tahun
+            $annualStatistics[$year] = $ageGroups;
+        }
+
+        $data = [
+            'status' => true,
+            'message' => 'Menampilkan Statistik Usia Penduduk 5 Tahun Terakhir',
+            'data' => $annualStatistics
+        ];
+
+        return response()->json($data, 200);
+    }
+
     public function countDeaths()
     {
         $currentYear = date('Y');

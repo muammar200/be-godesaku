@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API;
 
-// Route::get('/tes', [API\Public\PopulationController::class, 'tes']);
 Route::prefix('admin')->group(function () {
     Route::apiResource('news', API\NewsController::class);
     Route::apiResource('travel-articles', API\TravelArticleController::class);
@@ -171,7 +170,7 @@ Route::prefix('public')->group(function () {
     //     });
     // });
     Route::get('/populations/generals', [API\Public\PopulationController::class, 'countGenerals']);
-    // Route::get('/populations/ages', [API\Public\PopulationController::class, 'countAges']);
+    Route::get('/populations/ages-statistics', [API\Public\PopulationController::class, 'annualAgeStatistics']);
     Route::get('/populations/deaths', [API\Public\PopulationController::class, 'countDeaths']);
     Route::get('/populations/genders', [API\Public\PopulationController::class, 'countGenders']);
     Route::get('/populations/educations', [API\Public\PopulationController::class, 'countEducations']);
