@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Public;
 
 use App\Models\Slider;
 use App\Models\Contact;
+use App\Models\Facility;
 use App\Models\SocialMedia;
 use Illuminate\Http\Request;
 use App\Models\MasterPopulation;
@@ -162,7 +163,8 @@ class HomeController extends Controller
             'status' => true,
             'message' => 'Berhasil Menampilkan Sejarah Desa',
             'data' => [
-                'deskripsi' => $history
+                'deskripsi 1' => '<p>Desa Biringkanaya berdiri sekitar abad ke-18 dan awalnya dikenal dengan nama Sipatuo. Desa ini didirikan oleh seorang tokoh masyarakat bernama Arung, yang berasal dari daerah Bantimurung dan memutuskan untuk menetap di wilayah ini karena tanahnya yang subur dan strategis. Beliau bersama sekelompok kecil pengikutnya mulai membuka lahan, bercocok tanam, dan mendirikan pemukiman yang kemudian berkembang menjadi desa yang kita kenal sekarang.</p><p>Pada masa penjajahan Belanda, Desa Biringkanaya  menjadi salah satu pusat perlawanan terhadap penjajah. Masyarakat desa, yang sebagian besar adalah petani, ikut berjuang melawan penindasan dengan berbagai cara, termasuk menyembunyikan para pejuang kemerdekaan di hutan sekitar desa. Semangat gotong royong yang kuat di antara warga desa menjadi kekuatan utama dalam bertahan menghadapi masa-masa sulit tersebut.</p>',
+                'deskripsi 2' => '<p>Setelah kemerdekaan Indonesia, Desa Biringkanaya mulai berkembang pesat. Perkebunan, pertanian, dan perdagangan menjadi sektor utama perekonomian desa. Pada tahun 1932, desa ini diresmikan secara administratif sebagai bagian dari Kabupaten Maros, dengan struktur pemerintahan desa yang lebih terorganisir.</p><p>Seiring berjalannya waktu, Desa Biringkanaya terus mengalami perkembangan. Pembangunan infrastruktur, peningkatan layanan pendidikan, dan pengembangan ekonomi berbasis potensi lokal menjadi fokus utama pemerintah desa. Masyarakatnya yang ramah dan kental dengan budaya gotong royong, hingga kini tetap mempertahankan nilai-nilai tradisional sambil terus berinovasi untuk masa depan yang lebih baik.</p>',
             ]
         ];
 
@@ -187,12 +189,18 @@ class HomeController extends Controller
     public function showVillageInformation()
     {
         $count_population = MasterPopulation::count();
+        $count_place_worship = Facility::where('type_facility_id', 5)->count();
+        $tourist_destination = Facility::where('type_facility_id', 10)->count();
+        $facilities_count = Facility::where('type_facility_id', '!=', 5)->where('type_facility_id', '!=', 10)->count();
 
         $data = [
             'status' => true,
             'message' => 'Menampilkan Informasi Desa',
             'data' => [
                 'Jumlah Penduduk' => $count_population,
+                'Sarana dan Prasarana' => $facilities_count,
+                'Rumah Ibadah' => $count_place_worship,
+                'Wisata' => $tourist_destination,
             ],
         ];
 
