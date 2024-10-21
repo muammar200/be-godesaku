@@ -15,12 +15,13 @@ class FarmProduceResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id, // Ini harus mengambil id dari farm_produces
             'nama' => $this->name,
             'jumlah' => $this->quantity == floor($this->quantity)
-            ? number_format($this->quantity, 0, ',', '.') . ' ' . $this->production_unit
-            : number_format($this->quantity, 2, ',', '.') . ' ' . $this->production_unit,
+                ? number_format($this->quantity, 0, ',', '.')
+                : number_format($this->quantity, 2, ',', '.'),
+            'keterangan' => $this->production_unit,
             'icon' => url('storage/images/farms/' . $this->icon),
         ];
     }
-
 }
