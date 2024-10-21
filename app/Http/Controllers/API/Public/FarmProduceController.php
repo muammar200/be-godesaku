@@ -12,11 +12,13 @@ class FarmProduceController extends Controller
 {
     public function highestProductionLevel()
     {
-        $highestProductions = DB::table('farm_produces')
-            ->join('production_levels', 'farm_produces.production_level_id', '=', 'production_levels.id')
-            ->orderBy('production_levels.level', 'asc') 
-            ->orderBy('farm_produces.quantity', 'desc') 
-            ->limit(9)->get();
+        $highestProductions = FarmProduce::with('productionLevel')
+        ->select('farm_produces.*', 'production_levels.level as production_level', 'production_levels.production_unit')
+        ->join('production_levels', 'farm_produces.production_level_id', '=', 'production_levels.id')
+        ->orderBy('production_levels.level', 'asc')
+            ->orderBy('farm_produces.quantity', 'desc')
+            ->limit(9)
+            ->get();
 
         $data = [
             'status' => true,
@@ -29,12 +31,13 @@ class FarmProduceController extends Controller
 
     public function otherProductionLevels()
     {
-        $otherProductions = DB::table('farm_produces')
+        $otherProductions = FarmProduce::with('productionLevel')
+            ->select('farm_produces.*', 'production_levels.level as production_level', 'production_levels.production_unit')
             ->join('production_levels', 'farm_produces.production_level_id', '=', 'production_levels.id')
             ->orderBy('production_levels.level', 'asc')
             ->orderBy('farm_produces.quantity', 'desc')
-            ->offset(9) 
-            ->limit(1000) 
+            ->offset(9)
+            ->limit(1000)
             ->get();
 
         $data = [
