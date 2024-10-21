@@ -20,6 +20,8 @@ class FarmProduceController extends Controller
             ->limit(9)
             ->get();
 
+        FarmProduceResource::$sequence_id = 0;
+        
         $data = [
             'status' => true,
             'message' => 'Menampilkan Hasil Tani Tertinggi',
@@ -39,6 +41,8 @@ class FarmProduceController extends Controller
             ->offset(9)
             ->limit(1000)
             ->get();
+            
+        FarmProduceResource::$sequence_id = 0;
 
         $data = [
             'status' => true,

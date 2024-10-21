@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class FarmProduceResource extends JsonResource
 {
+    public static $sequence_id = 0;
     /**
      * Transform the resource into an array.
      *
@@ -14,8 +15,11 @@ class FarmProduceResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        self::$sequence_id++;
+
         return [
-            'id' => $this->id, // Ini harus mengambil id dari farm_produces
+            // 'id' => $this->id, 
+            'id' => self::$sequence_id,
             'nama' => $this->name,
             'jumlah' => $this->quantity == floor($this->quantity)
                 ? number_format($this->quantity, 0, ',', '.')
