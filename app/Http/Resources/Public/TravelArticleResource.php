@@ -14,20 +14,27 @@ class TravelArticleResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $images = $this->images->map(function ($image) {
+            return [
+                'type' => 'image',
+                'url' => url('storage/images/travel_articles/' . $image->image),
+            ];
+        });
+
+        $videos = $this->videos->map(function ($video) {
+            return [
+                'type' => 'video',
+                'url' => url('storage/videos/travel_articles/' . $video->video),
+            ];
+        });
+        
+        $assets = $images->concat($videos)->values();
+
         return [
             'title' => $this->title,
             'slug' => $this->slug,
             'content' => $this->content,
-            'images' => $this->images->map(function ($image) {
-                return [
-                    url('storage/images/travel_articles/' . $image->image),
-                ];
-            }),
-            'videos' => $this->videos->map(function ($video) {
-                return [
-                    url('storage/videos/travel_articles/' . $video->video),
-                ];
-            }),
+            'assets' => $assets,
         ];
     }
 }
