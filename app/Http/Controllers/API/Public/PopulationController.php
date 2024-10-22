@@ -237,9 +237,17 @@ class PopulationController extends Controller
             'status' => true,
             'message' => 'Menampilkan Statistik Penduduk berdasarkan Jenis Kelamin',
             'data' => [
-                'Total' => $total_populations,
-                'Laki laki' => $male_populations,
-                'Perempuan' => $female_populations,
+                // 'Total' => $total_populations,
+                // 'Laki laki' => $male_populations,
+                // 'Perempuan' => $female_populations,
+                [
+                    'label' => 'Laki laki',
+                    'total' => $male_populations
+                ],
+                [
+                    'label' => 'Perempuan',
+                    'total' => $female_populations
+                ]
             ],
         ];
 
