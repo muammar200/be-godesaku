@@ -298,9 +298,26 @@ class PopulationController extends Controller
         return response()->json($data, 200);
     }
 
+    // public function countEducations()
+    // {
+    //     $educations = Education::all();
+
+    //     $data = [
+    //         'status' => true,
+    //         'message' => 'Menampilkan Statistik Penduduk berdasarkan Pendidikan',
+    //         'data' => [],
+    //     ];
+
+    //     foreach ($educations as $education) {
+    //         $data['data'][$education->name] = MasterPopulation::where('education_id', $education->id)->count();
+    //     }
+
+    //     return response()->json($data, 200);
+    // }
+
     public function countEducations()
     {
-        $educations = Education::all();
+        $educations = Education::orderBy('id', 'desc')->get();
 
         $data = [
             'status' => true,
@@ -308,12 +325,20 @@ class PopulationController extends Controller
             'data' => [],
         ];
 
+        $id = 1;
+
         foreach ($educations as $education) {
-            $data['data'][$education->name] = MasterPopulation::where('education_id', $education->id)->count();
+            $data['data'][] = [
+                'id' => $id++, 
+                'name' => $education->name,
+                'total' => MasterPopulation::where('education_id', $education->id)->count(),
+            ];
         }
 
         return response()->json($data, 200);
     }
+
+
 
     public function countProfessions()
     {
