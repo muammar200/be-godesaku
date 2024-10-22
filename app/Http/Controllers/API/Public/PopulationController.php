@@ -29,12 +29,12 @@ class PopulationController extends Controller
             'status' => true,
             'message' => 'Menampilkan Informasi Umum Penduduk',
             'data' => [
-                'Jumlah Penduduk' => $count_population,
-                'Kepala Keluarga' => $count_kk,
-                'Laki Laki' => $count_male,
-                'Perempuan' => $count_female,
-                'Bekerja' => $count_workers,
-                'Meninggal' => $count_death,
+                ['id' => 1, 'image' => url('storage/images/populations/jumlah-penduduk.png'), 'title' => 'Jumlah Penduduk', 'total' => $count_population],
+                ['id' => 2, 'image' => url('storage/images/populations/kepala-keluarga.png'), 'title' => 'Kepala Keluarga', 'total' => $count_kk],
+                ['id' => 3, 'image' => url('storage/images/populations/laki-laki.png'), 'title' => 'Laki laki', 'total' => $count_male],
+                ['id' => 4, 'image' => url('storage/images/populations/perempuan.png'), 'title' => 'Perempuan', 'total' => $count_female],
+                ['id' => 5, 'image' => url('storage/images/populations/bekerja.png'), 'title' => 'Bekerja', 'total' => $count_workers],
+                ['id' => 6, 'image' => url('storage/images/populations/meninggal.png'), 'title' => 'Meninggal', 'total' => $count_death],
             ],
         ];
 
