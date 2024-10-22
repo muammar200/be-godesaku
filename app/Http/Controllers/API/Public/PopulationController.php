@@ -41,91 +41,192 @@ class PopulationController extends Controller
         return response()->json($data, 200);
     }
 
+    // public function annualAgeStatistics()
+    // {
+    //     //hitung juga yang meninggal
+
+    //     $currentYear = Carbon::now()->year;
+
+    //     // Menyiapkan array untuk menyimpan statistik per tahun
+    //     $annualStatistics = [];
+
+    //     // Looping untuk mendapatkan statistik dari 5 tahun terakhir
+    //     for ($year = $currentYear - 4; $year <= $currentYear; $year++) {
+    //         // Menghitung kategori umur untuk tahun tertentu
+    //         $ageGroups = [
+    //             'Anak-Anak 0 - 14 Tahun' => 0,
+    //             'Remaja 15 - 24 Tahun' => 0,
+    //             'Dewasa 25 - 59 Tahun' => 0,
+    //             'Lansia 60 Tahun Keatas' => 0,
+    //         ];
+
+    //         $populations = MasterPopulation::with('birth')->get();
+
+    //         foreach ($populations as $population) {
+    //             if ($population->birth) {
+    //                 // Menghitung umur berdasarkan tahun iterasi (bukan hanya tanggal lahir)
+    //                 $age = Carbon::createFromDate($population->birth->dob)->diffInYears(Carbon::createFromDate($year, 1, 1));
+
+    //                 // Memasukkan ke dalam kelompok umur yang sesuai
+    //                 if ($age <= 14) {
+    //                     $ageGroups['Anak-Anak 0 - 14 Tahun']++;
+    //                 } elseif ($age <= 24) {
+    //                     $ageGroups['Remaja 15 - 24 Tahun']++;
+    //                 } elseif ($age <= 59) {
+    //                     $ageGroups['Dewasa 25 - 59 Tahun']++;
+    //                 } else {
+    //                     $ageGroups['Lansia 60 Tahun Keatas']++;
+    //                 }
+    //             }
+    //         }
+
+    //         // Menyimpan data statistik per tahun
+    //         $annualStatistics[$year] = $ageGroups;
+    //     }
+
+    //     $data = [
+    //         'status' => true,
+    //         'message' => 'Menampilkan Statistik Usia Penduduk 5 Tahun Terakhir',
+    //         'data' => $annualStatistics
+    //     ];
+
+    //     return response()->json($data, 200);
+    // }
+
     public function annualAgeStatistics()
     {
-        //hitung juga yang meninggal
-
+        // Tahun saat ini
         $currentYear = Carbon::now()->year;
+
+        // Menyiapkan struktur data untuk judul kategori umur
+        $ageCategories = [
+            ['title' => ['Anak-anak', '0 - 14 Tahun']],
+            ['title' => ['Remaja', '15 - 24 Tahun']],
+            ['title' => ['Dewasa', '25 - 59 Tahun']],
+            ['title' => ['Lansia', '60 Tahun Keatas']]
+        ];
 
         // Menyiapkan array untuk menyimpan statistik per tahun
         $annualStatistics = [];
 
         // Looping untuk mendapatkan statistik dari 5 tahun terakhir
         for ($year = $currentYear - 4; $year <= $currentYear; $year++) {
-            // Menghitung kategori umur untuk tahun tertentu
-            $ageGroups = [
-                'Anak-Anak 0 - 14 Tahun' => 0,
-                'Remaja 15 - 24 Tahun' => 0,
-                'Dewasa 25 - 59 Tahun' => 0,
-                'Lansia 60 Tahun Keatas' => 0,
-            ];
+            // Menghitung jumlah populasi per kategori umur
+            $totals = [0, 0, 0, 0]; // Urutan: Anak-anak, Remaja, Dewasa, Lansia
 
             $populations = MasterPopulation::with('birth')->get();
 
             foreach ($populations as $population) {
                 if ($population->birth) {
-                    // Menghitung umur berdasarkan tahun iterasi (bukan hanya tanggal lahir)
+                    // Menghitung umur berdasarkan tahun iterasi
                     $age = Carbon::createFromDate($population->birth->dob)->diffInYears(Carbon::createFromDate($year, 1, 1));
 
                     // Memasukkan ke dalam kelompok umur yang sesuai
                     if ($age <= 14) {
-                        $ageGroups['Anak-Anak 0 - 14 Tahun']++;
+                        $totals[0]++;
                     } elseif ($age <= 24) {
-                        $ageGroups['Remaja 15 - 24 Tahun']++;
+                        $totals[1]++;
                     } elseif ($age <= 59) {
-                        $ageGroups['Dewasa 25 - 59 Tahun']++;
+                        $totals[2]++;
                     } else {
-                        $ageGroups['Lansia 60 Tahun Keatas']++;
+                        $totals[3]++;
                     }
                 }
             }
 
-            // Menyimpan data statistik per tahun
-            $annualStatistics[$year] = $ageGroups;
+            // Menyimpan data per tahun dalam struktur yang diinginkan
+            $annualStatistics[] = [
+                'id' => $year - ($currentYear - 5), // ID unik per tahun
+                'year' => (string) $year,
+                'total' => $totals
+            ];
         }
 
+        // Menyusun respons dengan data kategori dan statistik tahunan
         $data = [
             'status' => true,
             'message' => 'Menampilkan Statistik Usia Penduduk 5 Tahun Terakhir',
+            'category' => $ageCategories,
             'data' => $annualStatistics
         ];
 
         return response()->json($data, 200);
     }
 
+
+    // public function countDeaths()
+    // {
+    //     $currentYear = date('Y');
+    //     $startYear = $currentYear - 4;
+
+    //     $years = range($startYear, $currentYear);
+
+    //     $deaths = Death::select('dod')
+    //         ->whereYear('dod', '>=', $startYear)
+    //         ->whereYear('dod', '<=', $currentYear)
+    //         ->get()
+    //         ->groupBy(function ($date) {
+    //             return Carbon::parse($date->dod)->format('Y');
+    //         });
+
+    //     $deathsPerYear = [];
+
+    //     foreach ($years as $year) {
+    //         $deathsPerYear[] = [
+    //             'Tahun' => $year,
+    //             'Jumlah Kematian' => isset($deaths[$year]) ? $deaths[$year]->count() : 0
+    //         ];
+    //     }
+
+    //     $data = [
+    //         'status' => true,
+    //         'message' => 'Menampilkan Statistik Penduduk berdasarkan Kematian',
+    //         'data' => $deathsPerYear
+    //     ];
+
+
+    //     return response()->json($data, 200);
+    // }
+
     public function countDeaths()
     {
         $currentYear = date('Y');
         $startYear = $currentYear - 4;
 
+        // Membuat array tahun dari 5 tahun terakhir
         $years = range($startYear, $currentYear);
 
+        // Mendapatkan data kematian dari database berdasarkan rentang tahun
         $deaths = Death::select('dod')
-            ->whereYear('dod', '>=', $startYear)
+        ->whereYear('dod', '>=', $startYear)
             ->whereYear('dod', '<=', $currentYear)
             ->get()
             ->groupBy(function ($date) {
                 return Carbon::parse($date->dod)->format('Y');
             });
 
+        // Menyiapkan array untuk menyimpan statistik kematian per tahun
         $deathsPerYear = [];
 
-        foreach ($years as $year) {
+        // Menghitung jumlah kematian untuk setiap tahun dan menyusun dalam struktur yang diinginkan
+        foreach ($years as $index => $year) {
             $deathsPerYear[] = [
-                'Tahun' => $year,
-                'Jumlah Kematian' => isset($deaths[$year]) ? $deaths[$year]->count() : 0
+                'id' => $index + 1,  // ID urut dimulai dari 1
+                'year' => (string) $year,  // Tahun dalam format string
+                'total' => [isset($deaths[$year]) ? $deaths[$year]->count() : 0]  // Total kematian disimpan dalam array
             ];
         }
 
+        // Menyusun respons dengan data statistik kematian
         $data = [
             'status' => true,
             'message' => 'Menampilkan Statistik Penduduk berdasarkan Kematian',
             'data' => $deathsPerYear
         ];
 
-
         return response()->json($data, 200);
     }
+
     public function countGenders()
     {
         $total_populations = MasterPopulation::count();
