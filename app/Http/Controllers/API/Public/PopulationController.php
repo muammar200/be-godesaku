@@ -340,11 +340,30 @@ class PopulationController extends Controller
 
 
 
+    // public function countProfessions()
+    // {
+    //     $professionsWithCount = Profession::whereHas('master_populations')
+    //         ->withCount('master_populations')
+    //         ->get();
+
+    //     $data = [
+    //         'status' => true,
+    //         'message' => 'Menampilkan Statistik Penduduk berdasarkan Pekerjaan',
+    //         'data' => [],
+    //     ];
+
+    //     foreach ($professionsWithCount as $profession) {
+    //         $data['data'][$profession->name] = $profession->master_populations_count;
+    //     }
+
+    //     return response()->json($data, 200);
+    // }
+
     public function countProfessions()
     {
         $professionsWithCount = Profession::whereHas('master_populations')
-            ->withCount('master_populations')
-            ->get();
+        ->withCount('master_populations')
+        ->get();
 
         $data = [
             'status' => true,
@@ -352,8 +371,14 @@ class PopulationController extends Controller
             'data' => [],
         ];
 
+        $id = 1;
+
         foreach ($professionsWithCount as $profession) {
-            $data['data'][$profession->name] = $profession->master_populations_count;
+            $data['data'][] = [
+                'id' => $id++, 
+                'title' => $profession->name, 
+                'total' => $profession->master_populations_count,
+            ];
         }
 
         return response()->json($data, 200);
