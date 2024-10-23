@@ -263,8 +263,8 @@ class PopulationController extends Controller
             'status' => true,
             'message' => 'Menampilkan Statistik Penduduk berdasarkan Kewarganegaraan',
             'data' => [
-                'WNI' => $wni_civics,
-                'WNA' => $wna_civics,
+                ['id' => 1, 'image' => url('storage/images/populations/wni.png'), 'title' => 'WNI', 'total' => $wni_civics],
+                ['id' => 2, 'image' => url('storage/images/populations/wna.png'), 'title' => 'WNA', 'total' => $wna_civics],
             ],
         ];
 
@@ -284,14 +284,23 @@ class PopulationController extends Controller
         $data = [
             'status' => true,
             'message' => 'Menampilkan Statistik Penduduk berdasarkan Agama',
+            // 'data' => [
+            //     'Islam' => $islam,
+            //     'Kristen Protestan' => $kristen_protestan,
+            //     'Hindu' => $hindu,
+            //     'Buddha' => $buddha,
+            //     'Kristen Katolik' => $kristen_katolik,
+            //     'Konghucu' => $konghucu,
+            //     'Kepercayaan Lainnya' => $others,
+            // ],
             'data' => [
-                'Islam' => $islam,
-                'Kristen Protestan' => $kristen_protestan,
-                'Hindu' => $hindu,
-                'Buddha' => $buddha,
-                'Kristen Katolik' => $kristen_katolik,
-                'Konghucu' => $konghucu,
-                'Kepercayaan Lainnya' => $others,
+                ['id' => 1, 'image' => url('storage/images/populations/islam.png'), 'title' => 'Islam', 'total' => $islam],
+                ['id' => 2, 'image' => url('storage/images/populations/kristen_protestan.png'), 'title' => 'Kristen Protestan', 'total' => $kristen_protestan],
+                ['id' => 3, 'image' => url('storage/images/populations/hindu.png'), 'title' => 'Hindu', 'total' => $hindu],
+                ['id' => 4, 'image' => url('storage/images/populations/buddha.png'), 'title' => 'Buddha', 'total' => $buddha],
+                ['id' => 5, 'image' => url('storage/images/populations/kristen_katolik.png'), 'title' => 'Kristen Katolik', 'total' => $kristen_katolik],
+                ['id' => 6, 'image' => url('storage/images/populations/konghucu.png'), 'title' => 'Konghucu', 'total' => $konghucu],
+                ['id' => 6, 'image' => url('storage/images/populations/kepercayaan_lain.png'), 'title' => 'Kepercayaan Lain', 'total' => $others],
             ],
         ];
 
