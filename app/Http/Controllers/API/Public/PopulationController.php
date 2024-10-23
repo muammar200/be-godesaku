@@ -198,7 +198,7 @@ class PopulationController extends Controller
 
         // Mendapatkan data kematian dari database berdasarkan rentang tahun
         $deaths = Death::select('dod')
-        ->whereYear('dod', '>=', $startYear)
+            ->whereYear('dod', '>=', $startYear)
             ->whereYear('dod', '<=', $currentYear)
             ->get()
             ->groupBy(function ($date) {
@@ -329,7 +329,7 @@ class PopulationController extends Controller
 
         foreach ($educations as $education) {
             $data['data'][] = [
-                'id' => $id++, 
+                'id' => $id++,
                 'name' => $education->name,
                 'total' => MasterPopulation::where('education_id', $education->id)->count(),
             ];
@@ -362,8 +362,8 @@ class PopulationController extends Controller
     public function countProfessions()
     {
         $professionsWithCount = Profession::whereHas('master_populations')
-        ->withCount('master_populations')
-        ->get();
+            ->withCount('master_populations')
+            ->get();
 
         $data = [
             'status' => true,
@@ -375,8 +375,8 @@ class PopulationController extends Controller
 
         foreach ($professionsWithCount as $profession) {
             $data['data'][] = [
-                'id' => $id++, 
-                'title' => $profession->name, 
+                'id' => $id++,
+                'title' => $profession->name,
                 'total' => $profession->master_populations_count,
             ];
         }
@@ -417,8 +417,15 @@ class PopulationController extends Controller
 
         $data = [
             'status' => true,
-        'message' => 'Menampilkan Statistik Penduduk berdasarkan Status Perkawinan',
-            'data' => $responseData,
+            'message' => 'Menampilkan Statistik Penduduk berdasarkan Status Perkawinan',
+            // 'data' => $responseData,
+            'data' => [
+                ['id' => 1, 'image' => url('storage/images/populations/menikah.png'), 'title' => 'Menikah', 'total' => $responseData['Menikah']],
+                ['id' => 2, 'image' => url('storage/images/populations/belum_menikah.png'), 'title' => 'Belum Menikah', 'total' => $responseData['Belum Menikah']],
+                ['id' => 3, 'image' => url('storage/images/populations/bercerai.png'), 'title' => 'Bercerai', 'total' => $responseData['Belum Menikah']],
+                ['id' => 4, 'image' => url('storage/images/populations/kawin_tercatat.png'), 'title' => 'Kawin Tercatat', 'total' => $responseData['Kawin Tercatat']],
+                ['id' => 5, 'image' => url('storage/images/populations/kawin_tercatat.png'), 'title' => 'Kawin Tidak Tercatat', 'total' => $responseData['Kawin Tidak Tercatat']],
+            ],
         ];
 
         return response()->json($data);
