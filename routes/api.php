@@ -185,7 +185,7 @@ Route::prefix('public')->group(function () {
         Route::get('/social-media', [API\Public\HomeController::class, 'socialMedia']);
         Route::get('/profile-summary', [API\Public\HomeController::class, 'profileSummary']);
         Route::get('/general-information', [API\Public\HomeController::class, 'showGeneralInformation']);
-        // Route::get('/village-information', [API\Public\HomeController::class, 'showVillageInformation']);
+        Route::get('/village-information', [API\Public\HomeController::class, 'showVillageInformation']);
         Route::get('/location', [API\Public\HomeController::class, 'showLocation']);
         Route::get('/government-structure', [API\Public\HomeController::class, 'showGovernmentStructure']);
         Route::get('/organization-structure', [API\Public\HomeController::class, 'showOrganizationStructure']);

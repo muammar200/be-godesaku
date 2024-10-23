@@ -7,6 +7,7 @@ use App\Models\Contact;
 use App\Models\Facility;
 use App\Models\SocialMedia;
 use Illuminate\Http\Request;
+use App\Models\DetailApbDesa;
 use App\Models\MasterPopulation;
 use App\Models\GeneralInformation;
 use App\Http\Controllers\Controller;
@@ -25,7 +26,7 @@ class HomeController extends Controller
             'data' => SliderResource::collection($sliders),
         ];
 
-        return response()->json($data, 200); 
+        return response()->json($data, 200);
     }
 
     public function contact()
@@ -37,7 +38,7 @@ class HomeController extends Controller
             'data' => ContactResource::collection($contacts),
         ];
 
-        return response()->json($data, 200); 
+        return response()->json($data, 200);
     }
 
     public function socialMedia()
@@ -49,7 +50,7 @@ class HomeController extends Controller
             'data' => SocialMediaResource::collection($contacts),
         ];
 
-        return response()->json($data, 200); 
+        return response()->json($data, 200);
     }
 
     public function profileSummary()
@@ -65,7 +66,7 @@ class HomeController extends Controller
             ],
         ];
 
-        return response()->json($data, 200); 
+        return response()->json($data, 200);
     }
 
     public function showGeneralInformation()
@@ -188,7 +189,7 @@ class HomeController extends Controller
             ]
         ];
 
-        return response()->json($data, 200);   
+        return response()->json($data, 200);
     }
 
     public function showVillageInformation()
@@ -197,18 +198,63 @@ class HomeController extends Controller
         $count_place_worship = Facility::where('type_facility_id', 5)->count();
         $tourist_destination = Facility::where('type_facility_id', 10)->count();
         $facilities_count = Facility::where('type_facility_id', '!=', 5)->where('type_facility_id', '!=', 10)->count();
+        $bansos_count = 0;
+
+        // APB
+        $year = now()->year;
+        $totalRevenues = DetailApbDesa::whereHas('nameApbDesa.categoryApbDesa', function ($query) {
+            $query->where('name', 'Pendapatan Desa');
+        })->where('year', $year)->sum('amount');
+
+        $totalExpenses = DetailApbDesa::whereHas('nameApbDesa.categoryApbDesa', function ($query) {
+            $query->where('name', 'Belanja Desa');
+        })->where('year', $year)->sum('amount');
+
+        $totalOutlay = DetailApbDesa::whereHas('nameApbDesa.categoryApbDesa', function ($query) {
+            $query->where('name', 'Pembiayaan Desa');
+        })->where('year', $year)->sum('amount');
+
+        $apb = $totalRevenues + $totalExpenses + $totalOutlay;
+        $formattedApb = $this->formatNominal($apb);
+
 
         $data = [
             'status' => true,
             'message' => 'Menampilkan Informasi Desa',
             'data' => [
-                'Jumlah Penduduk' => $count_population,
-                'Sarana dan Prasarana' => $facilities_count,
-                'Rumah Ibadah' => $count_place_worship,
-                'Wisata' => $tourist_destination,
-            ],
+                ['id' => 1, 'image' => url('storage/images/populations/jumlah-penduduk.png'), 'title' => 'Jumlah Penduduk', 'total' => $count_population],
+                ['id' => 2, 'image' => url('storage/images/bansos/bantuan.png'), 'title' => 'Bantuan Sosial', 'total' => $bansos_count],
+                ['id' => 3, 'image' => url('storage/images/facilities/sarana.png'), 'title' => 'Laki laki', 'total' => $facilities_count],
+                ['id' => 4, 'image' => url('storage/images/apb/apb.png'), 'title' => 'APB Desa', 'total' => $formattedApb],
+                ['id' => 5, 'image' => url('storage/images/facilities/rumah-ibadah.png'), 'title' => 'Rumah Ibadah', 'total' => $count_place_worship],
+                ['id' => 6, 'image' => url('storage/images/facilities/wisata.png'), 'title' => 'Wisata', 'total' => $tourist_destination],
+            ]
         ];
 
         return response()->json($data, 200);
+    }
+
+    private function formatNominal($number)
+    {
+        if ($number >= 1000000000000) {
+            $formattedNumber = $number / 1000000000000;
+            return $this->removeTrailingZeros($formattedNumber) . ' Triliun';
+        } elseif ($number >= 1000000000) {
+            $formattedNumber = $number / 1000000000;
+            return $this->removeTrailingZeros($formattedNumber) . ' Miliar';
+        } elseif ($number >= 1000000) {
+            $formattedNumber = $number / 1000000;
+            return $this->removeTrailingZeros($formattedNumber) . ' Juta';
+        } elseif ($number >= 1000) {
+            $formattedNumber = $number / 1000;
+            return $this->removeTrailingZeros($formattedNumber) . ' Ribu';
+        }
+
+        return number_format($number, 0);
+    }
+
+    private function removeTrailingZeros($number)
+    {
+        return strpos($number, '.') !== false ? rtrim(rtrim(number_format($number, 1), '0'), '.') : $number;
     }
 }
