@@ -12,6 +12,24 @@ use App\Http\Resources\Public\DetailRevenueDesaResource;
 
 class ApbDesaController extends Controller
 {
+    public function getLastFiveYears()
+    {
+        $currentYear = date('Y');
+        $years = [];
+
+        for ($i = 0; $i < 5; $i++) {
+            $years[] = $currentYear - $i;
+        }
+
+        $data = [
+            'status' => true,
+            'message' => 'Menampilkan Data 5 Tahun Terakhir',
+            'data' => $years,
+        ];
+
+        return response()->json($data, 200);
+    }
+
     public function index(Request $request)
     {
         $defaultYear = now()->year;
@@ -33,9 +51,9 @@ class ApbDesaController extends Controller
             'status' => true,
             'message' => 'Menampilkan APB Desa Tahun ' . $currentYear,
             'data' => [
-            'Pendapatan Desa' => 'Rp ' . $this->formatAmount($totalRevenues),
-            'Belanja Desa' => 'Rp ' . $this->formatAmount($totalExpenses),
-            'Pembiayaan Desa' => 'Rp ' . $this->formatAmount($totalOutlay),
+                'Pendapatan Desa' => 'Rp ' . $this->formatAmount($totalRevenues),
+                'Belanja Desa' => 'Rp ' . $this->formatAmount($totalExpenses),
+                'Pembiayaan Desa' => 'Rp ' . $this->formatAmount($totalOutlay),
             ],
         ];
 
@@ -115,7 +133,7 @@ class ApbDesaController extends Controller
 
         $revenues = NameApbDesa::where('category_apb_desa_id', 2)->leftJoin('details_apb_desa', function ($join) use ($currentYear) {
             $join->on('name_apb_desa.id', '=', 'details_apb_desa.name_apb_desa_id')
-            ->where('details_apb_desa.year', '=', $currentYear);
+                ->where('details_apb_desa.year', '=', $currentYear);
         })
             ->select('name_apb_desa.id', 'name_apb_desa.name', DB::raw('IFNULL(SUM(details_apb_desa.amount), 0) as total_amount'))
             ->groupBy('name_apb_desa.id', 'name_apb_desa.name')
@@ -157,7 +175,7 @@ class ApbDesaController extends Controller
 
         $revenues = NameApbDesa::where('category_apb_desa_id', 3)->leftJoin('details_apb_desa', function ($join) use ($currentYear) {
             $join->on('name_apb_desa.id', '=', 'details_apb_desa.name_apb_desa_id')
-            ->where('details_apb_desa.year', '=', $currentYear);
+                ->where('details_apb_desa.year', '=', $currentYear);
         })
             ->select('name_apb_desa.id', 'name_apb_desa.name', DB::raw('IFNULL(SUM(details_apb_desa.amount), 0) as total_amount'))
             ->groupBy('name_apb_desa.id', 'name_apb_desa.name')
