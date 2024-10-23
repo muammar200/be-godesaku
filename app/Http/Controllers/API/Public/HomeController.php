@@ -222,7 +222,7 @@ class HomeController extends Controller
             'status' => true,
             'message' => 'Menampilkan Informasi Desa',
             'data' => [
-                ['id' => 1, 'image' => url('storage/images/populations/jumlah-penduduk.png'), 'title' => 'Jumlah Penduduk', 'total' => $count_population],
+                ['id' => 1, 'image' => url('storage/images/populations/jumlah-penduduk.png'), 'title' => 'Jumlah Penduduk', 'total' => $count_population . ' Jiwa'],
                 ['id' => 2, 'image' => url('storage/images/bansos/bantuan.png'), 'title' => 'Bantuan Sosial', 'total' => $bansos_count],
                 ['id' => 3, 'image' => url('storage/images/facilities/sarana.png'), 'title' => 'Laki laki', 'total' => $facilities_count],
                 ['id' => 4, 'image' => url('storage/images/apb/apb.png'), 'title' => 'APB Desa', 'total' => $formattedApb],
