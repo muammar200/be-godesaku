@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class FacilityWorshipResource extends JsonResource
 {
+    public static $sequence_id = 0;
     /**
      * Transform the resource into an array.
      *
@@ -14,7 +15,10 @@ class FacilityWorshipResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        self::$sequence_id++;
+        
         return [
+            'id' => self::$sequence_id,
             'nama' => $this->name,
             'lokasi' => $this->location
         ];

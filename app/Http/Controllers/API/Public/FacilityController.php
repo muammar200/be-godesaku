@@ -67,12 +67,12 @@ class FacilityController extends Controller
 
     public function getWorshipFacility()
     {
-        $masjid = Facility::where('category_facility_id', 1)->select('facilities.name', 'facilities.location')->get();
-        $protestan = Facility::where('category_facility_id', 2)->select('facilities.name', 'facilities.location')->get();
-        $katolik = Facility::where('category_facility_id', 3)->select('facilities.name', 'facilities.location')->get();
-        $pura = Facility::where('category_facility_id', 4)->select('facilities.name', 'facilities.location')->get();
-        $vihara = Facility::where('category_facility_id', 5)->select('facilities.name', 'facilities.location')->get();
-        $klenteng = Facility::where('category_facility_id', 6)->select('facilities.name', 'facilities.location')->get();
+        $masjid = Facility::where('category_facility_id', 1)->select('facilities.id', 'facilities.name', 'facilities.location')->get();
+        $protestan = Facility::where('category_facility_id', 2)->select('facilities.id', 'facilities.name', 'facilities.location')->get();
+        $katolik = Facility::where('category_facility_id', 3)->select('facilities.id', 'facilities.name', 'facilities.location')->get();
+        $pura = Facility::where('category_facility_id', 4)->select('facilities.id', 'facilities.name', 'facilities.location')->get();
+        $vihara = Facility::where('category_facility_id', 5)->select('facilities.id', 'facilities.name', 'facilities.location')->get();
+        $klenteng = Facility::where('category_facility_id', 6)->select('facilities.id', 'facilities.name', 'facilities.location')->get();
 
         $data = [
             'status' => true,
@@ -89,6 +89,7 @@ class FacilityController extends Controller
 
         return response()->json($data, 200);
     }
+
 
     // public function countTouristDestination()
     // {
