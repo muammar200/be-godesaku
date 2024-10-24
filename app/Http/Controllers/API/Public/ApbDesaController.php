@@ -137,6 +137,23 @@ class ApbDesaController extends Controller
         return response()->json($data, 200);
     }
 
+    public function titleExpense(Request $request)
+    {
+        $defaultYear = now()->year;
+        $currentYear = $request->input('year', $defaultYear);
+
+        $title = 'Belanja Desa ' . $currentYear;
+        $data = [
+            'status' => true,
+            'message' => 'Menampilkan Title Belanja Desa',
+            'data' => [
+                'title' => $title
+            ],
+        ];
+
+        return response()->json($data, 200);
+    }
+
     public function countExpense(Request $request)
     {
         $defaultYear = now()->year;
