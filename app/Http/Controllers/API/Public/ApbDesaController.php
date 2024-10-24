@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\DetailApbDesa;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Public\OutlayDesaResource;
 use App\Http\Resources\Public\ExpenseDesaResource;
 use App\Http\Resources\Public\RevenueDesaResource;
 use App\Http\Resources\Public\DetailRevenueDesaResource;
@@ -196,6 +197,23 @@ class ApbDesaController extends Controller
         return response()->json($data, 200);
     }
 
+    public function titleOutlay(Request $request)
+    {
+        $defaultYear = now()->year;
+        $currentYear = $request->input('year', $defaultYear);
+
+        $title = 'Pembiayaan Desa ' . $currentYear;
+        $data = [
+            'status' => true,
+            'message' => 'Menampilkan Title Pembiayaan Desa',
+            'data' => [
+                'title' => $title
+            ],
+        ];
+
+        return response()->json($data, 200);
+    }
+
     public function countOutlay(Request $request)
     {
         $defaultYear = now()->year;
@@ -212,7 +230,7 @@ class ApbDesaController extends Controller
         $data = [
             'status' => true,
             'message' => 'Menampilkan Pembiayaan Desa Tahun ' . $currentYear,
-            'data' => RevenueDesaResource::collection($revenues),
+            'data' => OutlayDesaResource::collection($revenues),
         ];
 
         return response()->json($data, 200);
