@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\DetailApbDesa;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Public\ExpenseDesaResource;
 use App\Http\Resources\Public\RevenueDesaResource;
 use App\Http\Resources\Public\DetailRevenueDesaResource;
 
@@ -56,6 +57,16 @@ class ApbDesaController extends Controller
                 'Pembiayaan Desa' => 'Rp ' . $this->formatAmount($totalOutlay),
             ],
         ];
+
+        // $data = [
+        //     'status' => true,
+        //     'message' => 'Menampilkan Informasi Desa',
+        //     'data' => [
+        //         ['id' => 1, 'image' => url('storage/images/apb/pendapatan.png'), 'title' => 'Pendapatan Desa', 'total' => 'Rp ' . $this->formatAmount($totalRevenues)],
+        //         ['id' => 2, 'image' => url('storage/images/apb/belanja.png'), 'title' => 'Belanja Desa', 'total' => 'Rp ' . $this->formatAmount($totalExpenses)],
+        //         ['id' => 3, 'image' => url('storage/images/bansos/pembiayaan.png'), 'title' => 'Pembiyaan Desa', 'total' => $totalOutlay],
+        //     ]
+        // ];
 
         return response()->json($data, 200);
     }
@@ -142,7 +153,7 @@ class ApbDesaController extends Controller
         $data = [
             'status' => true,
             'message' => 'Menampilkan Belanja Desa Tahun ' . $currentYear,
-            'data' => RevenueDesaResource::collection($revenues),
+            'data' => ExpenseDesaResource::collection($revenues),
         ];
 
         return response()->json($data, 200);
