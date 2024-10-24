@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class RevenueDesaResource extends JsonResource
 {
+    public static $sequence_id = 0;
     /**
      * Transform the resource into an array.
      *
@@ -14,19 +15,21 @@ class RevenueDesaResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        self::$sequence_id++;
+
         return [
-            'id' => $this->id, 
-            'nama' => $this->name, 
-            'jumlah' => $this->formatAmount($this->total_amount), 
+            'id' => self::$sequence_id,
+            'name' => $this->name, 
+            'total' => $this->formatAmount($this->total_amount), 
         ];
     }
 
     private function formatAmount($amount)
     {
         if (intval($amount) == $amount) {
-            return (string) intval($amount);
+            return (float) $amount;
         }
 
-        return (string) $amount;
+        return (float) $amount;
     }
 }
