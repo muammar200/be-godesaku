@@ -226,6 +226,7 @@ Route::prefix('public')->group(function () {
     Route::get('/apb-desa/generals', [API\Public\ApbDesaController::class, 'index']);
     Route::get('/apb-desa/revenues', [API\Public\ApbDesaController::class, 'countRevenue']);
     Route::get('/apb-desa/revenues/list', [API\Public\ApbDesaController::class, 'getRevenue']);
+    Route::get('/apb-desa/expenses/title', [API\Public\ApbDesaController::class, 'titleExpense']);
     Route::get('/apb-desa/expenses', [API\Public\ApbDesaController::class, 'countExpense']);
     Route::get('/apb-desa/expenses/list', [API\Public\ApbDesaController::class, 'getExpense']);
     Route::get('/apb-desa/outlay', [API\Public\ApbDesaController::class, 'countOutlay']);
