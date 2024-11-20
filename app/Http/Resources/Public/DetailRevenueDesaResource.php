@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class DetailRevenueDesaResource extends JsonResource
 {
+    public static $sequence_id = 0;
     /**
      * Transform the resource into an array.
      *
@@ -14,8 +15,10 @@ class DetailRevenueDesaResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        self::$sequence_id++;
+
         return [
-            'id' => $this->id,
+            'id' => self::$sequence_id,
             'rincian' => $this->detailApbDesa->map(function ($detail){
                 return $detail->name;
             }),
