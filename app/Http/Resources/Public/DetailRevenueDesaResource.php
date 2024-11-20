@@ -16,15 +16,14 @@ class DetailRevenueDesaResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'nama_pendapatan' => $this->name,
-            'total' => 'Rp.' . $this->formatAmount($this->detailApbDesa->sum('amount')),
-            'rincian_pendapatan' => $this->detailApbDesa->map(function ($detail) {
-                return [
-                    'id' => $detail->id,
-                    'nama' => $detail->name,
-                    'jumlah' => 'Rp.' .  $this->formatAmount($detail->amount),
-                ];
+            'rincian' => $this->detailApbDesa->map(function ($detail){
+                return $detail->name;
             }),
+            'jumlah' => $this->detailApbDesa->map(function ($detail){
+                return $this->formatAmount($detail->amount);
+            }),
+            'title' => $this->name,
+            'total' => $this->formatAmount($this->detailApbDesa->sum('amount')),
         ];
     }
 
