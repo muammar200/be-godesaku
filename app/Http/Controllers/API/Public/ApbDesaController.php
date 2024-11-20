@@ -72,6 +72,23 @@ class ApbDesaController extends Controller
         return response()->json($data, 200);
     }
 
+    public function titleRevenue(Request $request)
+    {
+        $defaultYear = now()->year;
+        $currentYear = $request->input('year', $defaultYear);
+
+        $title = 'Pendapatan Desa ' . $currentYear;
+        $data = [
+            'status' => true,
+            'message' => 'Menampilkan Title Pendapatan Desa',
+            'data' => [
+                'title' => $title
+            ],
+        ];
+
+        return response()->json($data, 200);
+    }
+
     // public function countRevenue(Request $request)
     // {
     //     $defaultYear = now()->year;
