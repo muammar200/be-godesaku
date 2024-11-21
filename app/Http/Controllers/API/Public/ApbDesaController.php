@@ -53,21 +53,11 @@ class ApbDesaController extends Controller
             'status' => true,
             'message' => 'Menampilkan APB Desa Tahun ' . $currentYear,
             'data' => [
-                'Pendapatan Desa' => 'Rp ' . $this->formatAmount($totalRevenues),
-                'Belanja Desa' => 'Rp ' . $this->formatAmount($totalExpenses),
-                'Pembiayaan Desa' => 'Rp ' . $this->formatAmount($totalOutlay),
+                ['id' => 1, 'title' => 'Pendapatan Desa', 'total' => $this->formatAmount($totalRevenues), 'icon' => url('storage/images/apb/pendapatan.png'),],
+                ['id' => 2, 'title' => 'Belanja Desa', 'total' => $this->formatAmount($totalExpenses), 'icon' => url('storage/images/apb/belanja.png'),],
+                ['id' => 3, 'title' => 'Pembiayaan Desa', 'total' => $this->formatAmount($totalOutlay), 'icon' => url('storage/images/apb/pembiayaan.png'),],
             ],
         ];
-
-        // $data = [
-        //     'status' => true,
-        //     'message' => 'Menampilkan Informasi Desa',
-        //     'data' => [
-        //         ['id' => 1, 'image' => url('storage/images/apb/pendapatan.png'), 'title' => 'Pendapatan Desa', 'total' => 'Rp ' . $this->formatAmount($totalRevenues)],
-        //         ['id' => 2, 'image' => url('storage/images/apb/belanja.png'), 'title' => 'Belanja Desa', 'total' => 'Rp ' . $this->formatAmount($totalExpenses)],
-        //         ['id' => 3, 'image' => url('storage/images/bansos/pembiayaan.png'), 'title' => 'Pembiyaan Desa', 'total' => $totalOutlay],
-        //     ]
-        // ];
 
         return response()->json($data, 200);
     }
