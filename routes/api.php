@@ -235,4 +235,7 @@ Route::prefix('public')->group(function () {
     Route::get('/apb-desa/outlay/title', [API\Public\ApbDesaController::class, 'titleOutlay']);
     Route::get('/apb-desa/outlay', [API\Public\ApbDesaController::class, 'countOutlay']);
     Route::get('/apb-desa/outlay/list', [API\Public\ApbDesaController::class, 'getOutlay']);
+
+    Route::get('/idm/status-and-score', [API\Public\IdmController::class, 'getStatusAndScore']);
+    Route::get('/idm/generals', [API\Public\IdmController::class, 'getIdmInfo']);
 });
