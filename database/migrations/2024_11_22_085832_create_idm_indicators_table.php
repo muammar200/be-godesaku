@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('idm_indicators', function (Blueprint $table) {
             $table->id();
-            $table->string('indicator');
-            
+            $table->foreignId('idm_indicator_category_id')->constrained('idm_indicator_categories');
+            $table->year('year');
+            $table->text('indicator');
+            $table->integer('score')->nullable();
+            $table->text('description')->nullable();
+            $table->text('activity')->nullable();
+            $table->decimal('grade', 10, 4)->nullable();
             $table->timestamps();
         });
     }

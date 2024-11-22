@@ -115,14 +115,20 @@ class DatabaseSeeder extends Seeder
         //     FarmProduceSeeder::class,
         // ]);
 
+        // $this->call([
+        //     IdmInfoSeeder::class,
+        // ]);
+        // $this->call([
+        //     IdmAnnualScoresSeeder::class,
+        // ]);
+        // $this->call([
+        //     IdmIndicatorCategoriesSeeder::class,
+        // ]);
         $this->call([
-            IdmInfoSeeder::class,
+            IdmIndicatorSeeder::class,
         ]);
         $this->call([
-            IdmAnnualScoresSeeder::class,
-        ]);
-        $this->call([
-            IdmIndicatorCategoriesSeeder::class,
+            ActivityImplementerSeeder::class,
         ]);
     }
 }
