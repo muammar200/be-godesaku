@@ -124,11 +124,20 @@ class DatabaseSeeder extends Seeder
         // $this->call([
         //     IdmIndicatorCategoriesSeeder::class,
         // ]);
+        // $this->call([
+        //     IdmIndicatorSeeder::class,
+        // ]);
+        // $this->call([
+        //     ActivityImplementerSeeder::class,
+        // ]);
+
         $this->call([
-            IdmIndicatorSeeder::class,
+            BansosSeeder::class,
         ]);
         $this->call([
-            ActivityImplementerSeeder::class,
+            BansosReceiverSeeder::class,
         ]);
+
+
     }
 }
