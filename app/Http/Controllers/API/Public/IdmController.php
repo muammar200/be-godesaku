@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\API\Public;
 
 use App\Models\IdmInfo;
+use App\Models\IdmIndicator;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\IdmAnnualScore;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Public\IdmResource;
 
 class IdmController extends Controller
 {
@@ -62,6 +64,157 @@ class IdmController extends Controller
 
         return response()->json($data, 200);
     }    
+
+    public function getScoreIks()
+    {
+        $score = IdmIndicator::where('year', '2023')->whereHas('idmIndicatorCategory', function ($q) {
+            $q->where('name', 'iks');
+        })->sum('score');
+
+        $count = IdmIndicator::where('year', '2023')->whereHas('idmIndicatorCategory', function ($q) {
+            $q->where('name', 'iks');
+        })->count();
+
+        $result = $count > 0 ? $score / $count : 0;
+
+        $result = rtrim(rtrim(number_format($result, 4), '0'), '.');
+
+        $data = [
+            'status' => true,
+            'message' => 'Menampilkan Total Skor IKS Tahun 2023 ',
+            'data' => $result,
+        ];
+
+        return response()->json($data, 200);
+    }
+
+    public function getDataIks()
+    {
+        $query = IdmIndicator::where('year', '2023')->whereHas('idmIndicatorCategory', function ($q){
+            $q->where('name', 'iks');
+        })->get();
+
+        $data = [
+            'status' => true,
+            'message' => 'Menampilkan Data IKS Tahun 2023 ',
+            'data' => IdmResource::collection($query),
+        ];
+
+        return response()->json($data, 200);
+    }
+
+    public function getScoreIkl()
+    {
+        $score = IdmIndicator::where('year', '2023')->whereHas('idmIndicatorCategory', function ($q) {
+            $q->where('name', 'ikl');
+        })->sum('score');
+
+        $count = IdmIndicator::where('year', '2023')->whereHas('idmIndicatorCategory', function ($q) {
+            $q->where('name', 'ikl');
+        })->count();
+
+        $result = $count > 0 ? $score / $count : 0;
+
+        $result = rtrim(rtrim(number_format($result, 4), '0'), '.');
+
+        $data = [
+            'status' => true,
+            'message' => 'Menampilkan Total Skor IKL Tahun 2023 ',
+            'data' => $result,
+        ];
+
+        return response()->json($data, 200);
+    }
+
+    public function getDataIkl()
+    {
+        $query = IdmIndicator::where('year', '2023')->whereHas('idmIndicatorCategory', function ($q){
+            $q->where('name', 'ikl');
+        })->get();
+
+        $data = [
+            'status' => true,
+            'message' => 'Menampilkan Data IKL Tahun 2023',
+            'data' => IdmResource::collection($query),
+        ];
+
+        return response()->json($data, 200);
+    }
+
+    public function getScoreIke()
+    {
+        $score = IdmIndicator::where('year', '2023')->whereHas('idmIndicatorCategory', function ($q) {
+            $q->where('name', 'ike');
+        })->sum('score');
+
+        $count = IdmIndicator::where('year', '2023')->whereHas('idmIndicatorCategory', function ($q) {
+            $q->where('name', 'ike');
+        })->count();
+
+        $result = $count > 0 ? $score / $count : 0;
+
+        $result = rtrim(rtrim(number_format($result, 4), '0'), '.');
+
+        $data = [
+            'status' => true,
+            'message' => 'Menampilkan Total Skor IKE Tahun 2023 ',
+            'data' => $result,
+        ];
+
+        return response()->json($data, 200);
+    }
+
+    public function getDataIke()
+    {
+        $query = IdmIndicator::where('year', '2023')->whereHas('idmIndicatorCategory', function ($q) {
+            $q->where('name', 'ike');
+        })->get();
+
+        $data = [
+            'status' => true,
+            'message' => 'Menampilkan Data IKE Tahun 2023',
+            'data' => IdmResource::collection($query),
+        ];
+
+        return response()->json($data, 200);
+    }
+
+    public function getScoreIklIdmAndStatus()
+    {
+        $scoreIkl = IdmIndicator::where('year', '2023')->whereHas('idmIndicatorCategory', function ($q) {
+            $q->where('name', 'ikl');
+        })->sum('score');
+
+        $countIkl = IdmIndicator::where('year', '2023')->whereHas('idmIndicatorCategory', function ($q) {
+            $q->where('name', 'ikl');
+        })->count();
+
+        $resultIkl = $countIkl > 0 ? $scoreIkl / $countIkl : 0;
+        $resultIkl = number_format($resultIkl, 4);
+
+        $idm = IdmInfo::where('year', '2023')->first();
+
+        $data = [
+            'status' => true,
+            'message' => 'Menampilkan Skor IKL, IDM, dan Status IDM Tahun 2023',
+            'data' => [
+                'ikl' => [
+                    'title' => 'IKL 2023',
+                    'value' => $resultIkl,
+                ],
+                'idm' => [
+                    'title' => 'IDM 2023',
+                    'value' => (string) $idm->total_score,
+                ],
+                'status_idm' => [
+                    'title' => 'Status IDM 2023',
+                    'value' => $idm->status,
+                ],
+            ]
+        ];
+
+        return response()->json($data, 200);
+    }
 
     private function formatAmount($amount)
     {

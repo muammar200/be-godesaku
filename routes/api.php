@@ -239,4 +239,11 @@ Route::prefix('public')->group(function () {
     Route::get('/idm/status-and-score', [API\Public\IdmController::class, 'getStatusAndScore']);
     Route::get('/idm/generals', [API\Public\IdmController::class, 'getIdmInfo']);
     Route::get('/idm/annual-statistics', [API\Public\IdmController::class, 'getAnnualStatistics']);
+    Route::get('/idm/score-ikl', [API\Public\IdmController::class, 'getScoreIkl']);
+    Route::get('/idm/data-ikl', [API\Public\IdmController::class, 'getDataIkl']);
+    Route::get('/idm/score-iks', [API\Public\IdmController::class, 'getScoreIks']);
+    Route::get('/idm/data-iks', [API\Public\IdmController::class, 'getDataIks']);
+    Route::get('/idm/score-ike', [API\Public\IdmController::class, 'getScoreIke']);
+    Route::get('/idm/data-ike', [API\Public\IdmController::class, 'getDataIke']);
+    Route::get('/idm/score-status-ikl-idm', [API\Public\IdmController::class, 'getScoreIklIdmAndStatus']);
 });
