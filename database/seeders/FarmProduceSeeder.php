@@ -23,13 +23,13 @@ class FarmProduceSeeder extends Seeder
             [
                 'name' => 'Jagung',
                 'quantity' => 250.75,
-                'production_level_id' => 2, // Kuintal
+                'production_level_id' => 2, // Kg
                 'icon' => 'padi_icon.png',
             ],
             [
                 'name' => 'Kedelai',
                 'quantity' => 350.00,
-                'production_level_id' => 3, // Kilogram
+                'production_level_id' => 2, // Kg
                 'icon' => 'padi_icon.png',
             ],
             [
@@ -41,7 +41,7 @@ class FarmProduceSeeder extends Seeder
             [
                 'name' => 'Teh',
                 'quantity' => 80.10,
-                'production_level_id' => 3, // Kilogram
+                'production_level_id' => 1, // Ton
                 'icon' => 'jagung_icon.png',
             ],
             [
@@ -53,37 +53,37 @@ class FarmProduceSeeder extends Seeder
             [
                 'name' => 'Tebu',
                 'quantity' => 600.75,
-                'production_level_id' => 2, // Kuintal
+                'production_level_id' => 2, // Kg
                 'icon' => 'jagung_icon.png',
             ],
             [
                 'name' => 'Singkong',
                 'quantity' => 500.00,
-                'production_level_id' => 2, // Kuintal
+                'production_level_id' => 2, // Kg
                 'icon' => 'jagung_icon.png',
             ],
             [
                 'name' => 'Kacang Tanah',
                 'quantity' => 220.30,
-                'production_level_id' => 3, // Kilogram
+                'production_level_id' => 1, // Ton
                 'icon' => 'jagung_icon.png',
             ],
             [
                 'name' => 'Bawang Merah',
                 'quantity' => 180.20,
-                'production_level_id' => 3, // Kilogram
+                'production_level_id' => 2, // Kg
                 'icon' => 'jagung_icon.png',
             ],
             [
                 'name' => 'Bawang Putih',
                 'quantity' => 190.15,
-                'production_level_id' => 3, // Kilogram
+                'production_level_id' => 1, // Ton
                 'icon' => 'jagung_icon.png',
             ],
             [
                 'name' => 'Cabai Merah',
                 'quantity' => 300.60,
-                'production_level_id' => 2, // Kuintal
+                'production_level_id' => 2, // Kg
                 'icon' => 'jagung_icon.png',
             ],
         ]);

@@ -15,17 +15,32 @@ class SocialMediaSeeder extends Seeder
     {
         SocialMedia::create([
             'username' => 'pemdes.biringkanaya',
-            'icon' => 'tiktok-icon.png',
+            'icon' => 'ig-icon.png',
             'is_active' => true,
         ]);
         SocialMedia::create([
             'username' => 'desa.biringkanaya',
-            'icon' => 'fb-icon.png',
+            'icon' => 'x-icon.png',
             'is_active' => true,
         ]);
         SocialMedia::create([
             'username' => 'biringkanaya.desa',
-            'icon' => 'telegram-icon.png',
+            'icon' => 'yt-icon.png',
+            'is_active' => true,
+        ]);
+        SocialMedia::create([
+            'username' => 'pemdes.biringkanaya',
+            'icon' => 'ig-icon.png',
+            'is_active' => true,
+        ]);
+        SocialMedia::create([
+            'username' => 'desa.biringkanaya',
+            'icon' => 'x-icon.png',
+            'is_active' => true,
+        ]);
+        SocialMedia::create([
+            'username' => 'biringkanaya.desa',
+            'icon' => 'yt-icon.png',
             'is_active' => true,
         ]);
     }

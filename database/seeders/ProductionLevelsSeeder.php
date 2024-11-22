@@ -20,12 +20,8 @@ class ProductionLevelsSeeder extends Seeder
             ],
             [
                 'level' => 2,
-                'production_unit' => 'Kuintal/Tahun',
+                'production_unit' => 'Kg/Tahun',
             ],
-            [
-                'level' => 3,
-                'production_unit' => 'Kilogram/Tahun',
-            ]
         ]);
     }
 }
