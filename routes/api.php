@@ -212,8 +212,8 @@ Route::prefix('public')->group(function () {
     Route::get('/farm-produces/highest', [API\Public\FarmProduceController::class, 'highestProductionLevel']);
     Route::get('/farm-produces/others', [API\Public\FarmProduceController::class, 'otherProductionLevels']);
 
-    // Route::get('/bansos', [API\Public\BansosController::class, 'index']);
-    // Route::get('/bansos/{nik}', [API\Public\BansosController::class, 'getBansosByNik']);
+    Route::get('/bansos', [API\Public\BansosController::class, 'index']);
+    Route::get('/bansos/{nik}', [API\Public\BansosController::class, 'getBansosByNik']);
 
     Route::get('/facilities', [API\Public\FacilityController::class, 'index']);
     Route::get('/facilities/list', [API\Public\FacilityController::class, 'index2']);

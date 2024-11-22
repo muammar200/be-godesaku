@@ -74,5 +74,9 @@ class MasterPopulation extends Model
         return $this->hasMany(MarriageDivorce::class);
     }
 
+    public function bansosReceivers(): HasMany
+    {
+        return $this->hasMany(BansosReceiver::class);
+    }
     
 }
