@@ -186,6 +186,7 @@ Route::prefix('public')->group(function () {
         Route::get('/profile-summary', [API\Public\HomeController::class, 'profileSummary']);
         Route::get('/general-information', [API\Public\HomeController::class, 'showGeneralInformation']);
         Route::get('/village-information', [API\Public\HomeController::class, 'showVillageInformation']);
+        Route::get('/village-information-and-idm', [API\Public\HomeController::class, 'showVillageInformationAndIdm']);
         Route::get('/location', [API\Public\HomeController::class, 'showLocation']);
         Route::get('/government-structure', [API\Public\HomeController::class, 'showGovernmentStructure']);
         Route::get('/organization-structure', [API\Public\HomeController::class, 'showOrganizationStructure']);
