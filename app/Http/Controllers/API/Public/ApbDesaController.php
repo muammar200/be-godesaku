@@ -20,7 +20,10 @@ class ApbDesaController extends Controller
         $years = [];
 
         for ($i = 0; $i < 5; $i++) {
-            $years[] = $currentYear - $i;
+            $years[] = [
+                'id' => $i + 1,
+                'year' => $currentYear - $i,
+            ];
         }
 
         $data = [

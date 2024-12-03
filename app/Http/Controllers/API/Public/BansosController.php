@@ -49,7 +49,10 @@ class BansosController extends Controller
         $penduduk = MasterPopulation::where('nik', $nik)->first();
 
         if (!$penduduk) {
-            return response()->json(['message' => 'Penduduk tidak ditemukan'], 404);
+            return response()->json([
+                'status' => false,
+                'message' => 'Penduduk tidak ditemukan'
+            ], 404);
         }
 
         // Ambil bantuan sosial yang diterima oleh penduduk tersebut
@@ -59,21 +62,24 @@ class BansosController extends Controller
 
         // Format respons
         $result = [
-            'nama' => $penduduk->full_name,
-            'nik' => $penduduk->nik,
-            'bansos' => $bansos->map(function ($item, $index) use ($penduduk) {
-                return [
-                    'id' => $index + 1,
-                    'nama' => $penduduk->full_name,
-                    'nik' => $penduduk->nik,
-                    'nama_bansos' => $item->bansos->name,
-                    'deskripsi_bansos' => $item->bansos->description,
-                    'periode' => Carbon::parse($item->period)->translatedFormat('d F Y'),
-                ];
-            }),
+            'status' => true,
+            'message' => 'Get Bansos Penduduk By NIK',
+            'data' => [
+                'nama' => $penduduk->full_name,
+                'nik' => $penduduk->nik,
+                'bansos' => $bansos->map(function ($item, $index) use ($penduduk) {
+                    return [
+                        'id' => $index + 1,
+                        'nama' => $penduduk->full_name,
+                        'nik' => $penduduk->nik,
+                        'nama_bansos' => $item->bansos->name,
+                        'deskripsi_bansos' => $item->bansos->description,
+                        'periode' => Carbon::parse($item->period)->translatedFormat('d F Y'),
+                    ];
+                }),
+            ]
         ];
 
         return response()->json($result);
     }
-
 }
