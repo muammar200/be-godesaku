@@ -24,7 +24,7 @@ class BirthSeeder extends Seeder
 
         for ($i = 1; $i <= 100; $i++) {
             DB::table('births')->insert([
-                'master_pupulation_id' => $i,  
+                'master_population_id' => $i,  
                 'pob' => $faker->city,
 
                 // Randomizing the dob between 65 years ago and now
