@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\BirthType;
 use App\Models\CanRead;
+use App\Models\CategoryApbDesa;
 use App\Models\Death;
 use App\Models\Education;
 use App\Models\FamilyPosition;
@@ -12,6 +13,7 @@ use App\Models\MarriageDivorce;
 use App\Models\MasterPopulation;
 use App\Models\Profession;
 use App\Models\Religion;
+use App\Models\SocialMedia;
 use App\Models\TravelArticle;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -138,6 +140,32 @@ class DatabaseSeeder extends Seeder
             BansosReceiverSeeder::class,
         ]);
 
-
+        $this->call([
+            GeneralInformationSeeder::class,
+        ]);
+        $this->call([
+            ContactSeeder::class,
+        ]);
+        $this->call([
+            SocialMediaSeeder::class,
+        ]);
+        $this->call([
+            CategoryApbDesaSeeder::class,
+        ]);
+        $this->call([
+            TypeFacilitySeeder::class,
+        ]);
+        $this->call([
+            CategoryFacilitySeeder::class,
+        ]);
+        $this->call([
+            NameApbDesaSeeder::class,
+        ]);
+        $this->call([
+            DetailApbDesaSeeder::class,
+        ]);
+        $this->call([
+            ProductSeeder::class,
+        ]);
     }
 }
