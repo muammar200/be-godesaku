@@ -14,7 +14,7 @@ Route::prefix('public')->group(function () {
         $data = [
             'status' => true,
             'message' => 'Show Listing Categories Success',
-            'data' =>[
+            'data' => [
                 [
                     "id" => 1,
                     "name" => "Lihat Semua",
@@ -31,16 +31,77 @@ Route::prefix('public')->group(function () {
                     "id" => 4,
                     "name" => "Fasilitas Umum",
                 ],
-            ]  
+            ]
         ];
 
         return response()->json($data);
     });
-    Route::get('/listing-locations/1', function () {
+    // Route::get('/listing-locations/1', function () {
+    //     $locations = [
+    //         'status' => true,
+    //         'message' => 'Show All Listing Success',
+    //         'data' => [
+    //                 [
+    //                     "id" => 1,
+    //                     "name" => "Sultan Ayam Geprek Samata",
+    //                     "location" => "Samata, Gowa",
+    //                     "latitude" => -5.20218,
+    //                     "longitude" => 119.49572
+    //                 ],
+    //                 [
+    //                     "id" => 2,
+    //                     "name" => "Bokatana Samata",
+    //                     "location" => "Samata, Gowa",
+    //                     "latitude" => -5.20196,
+    //                     "longitude" => 119.49466
+    //                 ],
+    //                 [
+    //                     "id" => 3,
+    //                     "name" => "Bukit Samata",
+    //                     "location" => "Samata, Gowa",
+    //                     "latitude" => -5.20083,
+    //                     "longitude" => 119.49733
+    //                 ],
+    //                 [
+    //                     "id" => 4,
+    //                     "name" => "UPT Perpustakaan Syekh Yusuf UIN Alauddin Makassar",
+    //                     "location" => "Samata, Gowa",
+    //                     "latitude" => -5.20667,
+    //                     "longitude" => 119.49751
+    //                 ],
+    //                 [
+    //                     "id" => 5,
+    //                     "name" => "Puskesmas Samata",
+    //                     "location" => "Samata, Gowa",
+    //                     "latitude" => -5.20103,
+    //                     "longitude" => 119.48786
+    //                 ]
+    //             ]
+    //     ];
+
+    //     // if (isset($locations['data'][$id])) {
+    //     //     $response = [
+    //     //         'status' => true,
+    //     //         'message' => $locations['message'],
+    //     //         'data' => $locations['data'][$id]
+    //     //     ];
+    //     // } else {
+    //     //     return response()->json([
+    //     //         'status' => false,
+    //     //         'message' => 'Location not found',
+    //     //         'data' => []
+    //     //     ], 404); 
+    //     // }
+
+    //     return response()->json($locations);
+
+    // });
+    Route::get('/listing-locations/{id}', function ($id) {
         $locations = [
             'status' => true,
-            'message' => 'Show All Listing Success',
+            'message' => 'Show Listing By Category Id Success',
             'data' => [
+                1 => [
                     [
                         "id" => 1,
                         "name" => "Sultan Ayam Geprek Samata",
@@ -76,31 +137,7 @@ Route::prefix('public')->group(function () {
                         "latitude" => -5.20103,
                         "longitude" => 119.48786
                     ]
-                ]
-        ];
-
-        // if (isset($locations['data'][$id])) {
-        //     $response = [
-        //         'status' => true,
-        //         'message' => $locations['message'],
-        //         'data' => $locations['data'][$id]
-        //     ];
-        // } else {
-        //     return response()->json([
-        //         'status' => false,
-        //         'message' => 'Location not found',
-        //         'data' => []
-        //     ], 404); 
-        // }
-
-        return response()->json($locations);
-
-    });
-    Route::get('/listing-locations/{id}', function ($id) {
-        $locations = [
-            'status' => true,
-            'message' => 'Show Listing By Category Id Success',
-            'data' => [
+                ],
                 2 => [
                     [
                         "id" => 1,
@@ -154,19 +191,18 @@ Route::prefix('public')->group(function () {
         } else {
             return response()->json([
                 'status' => false,
-            'message' => 'Location not found',
+                'message' => 'Location not found',
                 'data' => []
-            ], 404); 
+            ], 404);
         }
 
         return response()->json($response);
-
     });
 
     // Route::prefix('teschart')->group(function(){
     //     Route::get('/jumlah-penduduk', [API\PendudukController::class, 'getPendudukByAgeCategoryEachYear']);
     //     Route::get('/jenis-kelamin', function(){
-            
+
     //     });
     // });
     Route::get('/populations/generals', [API\Public\PopulationController::class, 'countGenerals']);
@@ -179,7 +215,7 @@ Route::prefix('public')->group(function () {
     Route::get('/populations/religions', [API\Public\PopulationController::class, 'countReligions']);
     Route::get('/populations/civics', [API\Public\PopulationController::class, 'countCivics']);
 
-    Route::prefix('home')->group(function(){
+    Route::prefix('home')->group(function () {
         Route::get('/sliders', [API\Public\HomeController::class, 'slider']);
         Route::get('/contacts', [API\Public\HomeController::class, 'contact']);
         Route::get('/social-media', [API\Public\HomeController::class, 'socialMedia']);
@@ -222,7 +258,7 @@ Route::prefix('public')->group(function () {
     Route::get('/worship-facilities/list', [API\Public\FacilityController::class, 'getWorshipFacility']);
     Route::get('/tourist-destination', [API\Public\FacilityController::class, 'countTouristDestination']);
     Route::get('/tourist-destination/list', [API\Public\FacilityController::class, 'getTouristDestination']);
-    
+
     Route::get('/years', [API\Public\ApbDesaController::class, 'getLastFiveYears']);
     Route::get('/apb-desa/generals', [API\Public\ApbDesaController::class, 'index']);
     Route::get('/apb-desa/revenues-and-expenses/title', [API\Public\ApbDesaController::class, 'titleRevenueAndExpense']);
