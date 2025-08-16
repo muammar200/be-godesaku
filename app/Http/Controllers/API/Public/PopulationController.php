@@ -300,7 +300,7 @@ class PopulationController extends Controller
                 ['id' => 4, 'image' => url('storage/images/populations/buddha.png'), 'title' => 'Buddha', 'total' => $buddha],
                 ['id' => 5, 'image' => url('storage/images/populations/kristen_katolik.png'), 'title' => 'Kristen Katolik', 'total' => $kristen_katolik],
                 ['id' => 6, 'image' => url('storage/images/populations/konghucu.png'), 'title' => 'Konghucu', 'total' => $konghucu],
-                ['id' => 6, 'image' => url('storage/images/populations/kepercayaan_lain.png'), 'title' => 'Kepercayaan Lain', 'total' => $others],
+                ['id' => 7, 'image' => url('storage/images/populations/kepercayaan_lain.png'), 'title' => 'Kepercayaan Lain', 'total' => $others],
             ],
         ];
 
